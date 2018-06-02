@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-6">
+    <textarea (change)="updateView($event)">
+
+    </textarea>
+  </div>
+  <div class="col-md-6">
+    <div id="rendered" [innerHtml]="renderedCnt|safe">
+
+    </div>
+
+  </div>
+</div>
