@@ -11,16 +11,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 app-sidebar">
+      <div class="post-search">
+        <input type="search" class="form-control" placeholder="搜索文章">
+      </div>
       <ul id="posts-list" class="list-unstyled">
-        <li>
-          <input type="search" class="form-control" placeholder="搜索文章">
-        </li>
         <li>
           <span>新建博客</span>
         </li>
-        <li *ngFor="let item of posts" (click)="postClick()">
+        <li *ngFor="let item of posts" (click)="postClick(item)">
         <span>
-          {{item.title}}
+          {{item}}
         </span>
           <i title="编辑">
 

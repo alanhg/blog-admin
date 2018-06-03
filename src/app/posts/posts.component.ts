@@ -14,7 +14,7 @@ declare let showdown: any;
 })
 export class PostsComponent implements OnInit {
 
-  posts: Array<any> = [];
+  posts: Array<String> = [];
   postHtml: SafeHtml;
   converter = new showdown.Converter();
 
@@ -23,17 +23,17 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.apiService.getPosts().subscribe(res => {
-      this.posts = res["data"];
+      this.posts = res["posts"];
     })
   }
 
-  searchPost() {
+  searchPost(keyword: string) {
 
   }
 
-  postClick() {
-    this.apiService.getPost().subscribe(res => {
-      this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res["data"]))
+  postClick(title: string) {
+    this.apiService.getPost(title).subscribe(res => {
+      this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res["content"]))
     })
   }
 }

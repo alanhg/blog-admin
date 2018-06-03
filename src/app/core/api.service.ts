@@ -20,11 +20,11 @@ export class ApiService {
   }
 
   getPosts() {
-    return this.http.get("/mock-data/posts-mock.json");
+    return this.http.get(`/api/posts`);
   }
 
-  getPost() {
-    return this.http.get("/mock-data/post-mock.json");
+  getPost(title: string) {
+    return this.http.get(`/api/posts/${title}`);
   }
 
 
