@@ -43,14 +43,23 @@ export class PostsComponent implements OnInit {
   }
 
 
-  postClick(title: string) {
-    this.apiService.getPost(title).subscribe(res => {
-      this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res["content"]))
-    })
+  postClick(event, title: string, i: number) {
+    const targetElement = event.target;
+    if (targetElement.tagName != "I") {
+      this.apiService.getPost(title).subscribe(res => {
+        this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res["content"]))
+      })
+    }
+    else if (targetElement.className.includes("fa-trash")) {
+      this.postDelete(title, i);
+    }
+    else {
+      this.postEdit(title);
+    }
   }
 
 
-  postEdit(title: string) {
+  postEdit(title: String) {
     this.router.navigateByUrl(`/posts/${title}`);
   }
 
@@ -70,7 +79,7 @@ export class PostsComponent implements OnInit {
     this.apiService.addPost(title).subscribe(res => {
       this.posts.splice(0, 0, res["title"]);
       this.createStatus = false;
-      this.postClick(res["title"]);
+      // this.postClick(res["title"]);
     })
   }
 }

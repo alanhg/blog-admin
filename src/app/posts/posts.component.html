@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-md-3 app-sidebar">
       <div class="post-search">
-        <input type="search" class="form-control" placeholder="搜索文章，共{{posts.length}}篇" (keyup)="queryField$.next($event.target.value)">
+        <input type="search" class="form-control" placeholder="搜索文章，共{{posts.length}}篇"
+               (keyup)="queryField$.next($event.target.value)">
       </div>
       <div *ngIf="createStatus==false;else elseBlock">
         <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">新建博客</button>
@@ -17,13 +18,13 @@
         </div>
       </ng-template>
       <ul id="posts-list" class="list-unstyled">
-        <li *ngFor="let item of posts;let i=index" (click)="postClick(item)">
+        <li *ngFor="let item of posts;let i=index" (click)="postClick($event,item,i)">
         <span>
           {{item}}
         </span>
-          <i class="fa fa-trash float-right" title="删除" (click)="postDelete(item,i)">
+          <i class="fa fa-trash float-right" title="删除">
           </i>
-          <i class="fa fa-edit float-right" title="编辑" (click)="postEdit(item)">
+          <i class="fa fa-edit float-right" title="编辑">
           </i>
         </li>
       </ul>
