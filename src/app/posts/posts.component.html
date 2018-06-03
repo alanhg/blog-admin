@@ -12,7 +12,7 @@
   <div class="row">
     <div class="col-md-3 app-sidebar">
       <div class="post-search">
-        <input type="search" class="form-control" placeholder="搜索文章">
+        <input type="search" class="form-control" placeholder="搜索文章，共{{posts.length}}篇">
       </div>
       <ul id="posts-list" class="list-unstyled">
         <li>
@@ -22,8 +22,7 @@
         <span>
           {{item}}
         </span>
-          <i title="编辑">
-
+          <i class="fa fa-edit float-right" title="编辑" (click)="postEdit(item)">
           </i>
         </li>
       </ul>

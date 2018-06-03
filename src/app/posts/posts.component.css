@@ -36,9 +36,21 @@ main {
   background-color: #f7faff;
 }
 
+#posts-list li {
+  padding: 5px 0;
+}
+
 #posts-list li:hover {
   cursor: pointer;
   background-color: #ecf3ff;
+}
+
+#posts-list li i {
+  display: none;
+}
+
+#posts-list li:hover i {
+  display: inline-block;
 }
 
 .post-search {

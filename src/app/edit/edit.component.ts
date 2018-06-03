@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../core/api.service";
+import {ActivatedRoute} from "@angular/router";
 
 declare let showdown: any;
 
@@ -13,18 +14,22 @@ export class EditComponent implements OnInit {
   renderedCnt: string;
   sourceCnt: string;
   converter = new showdown.Converter();
+  title: string;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+
   }
 
   ngOnInit() {
+    this.title = this.route.snapshot.paramMap.get("id");
+    this.apiService.getPost(this.title).subscribe(res => {
+      this.sourceCnt = res["content"];
+    })
   }
 
 
   publish() {
-    this.apiService.getPost().subscribe(res => {
-      this.sourceCnt = res["data"];
-    })
+
   }
 
   updateView(event) {
