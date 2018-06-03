@@ -39,8 +39,8 @@ export class ApiService {
     });
   }
 
-  addPost() {
-    return this.http.post("/mock-data/posts-mock.json", {});
+  addPost(title: string) {
+    return this.http.post("/api/posts", {title: title});
   }
 
   deploy() {

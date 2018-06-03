@@ -18,6 +18,7 @@ export class PostsComponent implements OnInit {
   posts: Array<String> = [];
   postHtml: SafeHtml;
   converter = new showdown.Converter();
+  createStatus = false;
 
   constructor(private apiService: ApiService, private sanitizer: DomSanitizer, private router: Router) {
   }
@@ -50,5 +51,15 @@ export class PostsComponent implements OnInit {
         this.posts.splice(index, 1);
       })
     }
+  }
+
+  createPost(title: string) {
+    if (title.trim() === "") {
+      return
+    }
+    this.apiService.addPost(title).subscribe(res => {
+      this.posts.splice(0, 0, res["title"]);
+      this.createStatus = false;
+    })
   }
 }
