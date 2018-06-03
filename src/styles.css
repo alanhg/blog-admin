@@ -2,3 +2,29 @@
 body {
   /*font-size: 2.0rem;*/
 }
+
+header {
+  background-color: #0d1626;
+  padding: 10px 0;
+}
+
+header ul li a {
+  color: white;
+}
+
+.app-navbar {
+  min-height: 4rem;
+  background-color: #563d7c;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05), inset 0 -1px 0 rgba(0, 0, 0, .1);
+}
+
+.app-navbar .navbar-nav .nav-link {
+  padding-right: .5rem;
+  padding-left: .5rem;
+  color: #cbbde2;
+}
+
+.app-navbar.navbar-nav .nav-link.active, .app-navbar.navbar-nav .nav-link:hover {
+  color: #fff;
+  background-color: transparent;
+}

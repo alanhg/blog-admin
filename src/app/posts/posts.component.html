@@ -1,18 +1,8 @@
-<header class="navbar app-navbar">
-  <ul class="navbar-nav flex-row">
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/posts">博客</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/about">关于</a>
-    </li>
-  </ul>
-</header>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3 app-sidebar">
       <div class="post-search">
-        <input type="search" class="form-control" placeholder="搜索文章，共{{posts.length}}篇">
+        <input type="search" class="form-control" placeholder="搜索文章，共{{posts.length}}篇" (keyup)="queryField$.next($event.target.value)">
       </div>
       <div *ngIf="createStatus==false;else elseBlock">
         <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">新建博客</button>
@@ -21,8 +11,8 @@
         <div class="input-group">
           <input type="text" class="form-control" #fileName/>
           <div class="input-group-append">
-            <i class="fa fa-check" (click)="createPost(fileName.value)"></i>
-            <i class="fa fa-close" (click)="createStatus=false"></i>
+            <i class="fa fa-2x  fa-check" (click)="createPost(fileName.value)"></i>
+            <i class="fa fa-2x fa-close" (click)="createStatus=false"></i>
           </div>
         </div>
       </ng-template>

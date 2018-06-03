@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../core/api.service";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Router} from "@angular/router";
+import {Subject} from "rxjs/Subject";
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 declare let showdown: any;
 
@@ -20,7 +24,12 @@ export class PostsComponent implements OnInit {
   converter = new showdown.Converter();
   createStatus = false;
 
+  queryField$ = new Subject<string>();
+
   constructor(private apiService: ApiService, private sanitizer: DomSanitizer, private router: Router) {
+    this.queryField$.debounceTime(400).distinctUntilChanged().switchMap(term => this.searchPost(term)).subscribe(res => {
+      this.posts = res["posts"];
+    })
   }
 
   ngOnInit() {
@@ -29,9 +38,10 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  searchPost(keyword: string) {
-
+  searchPost(term: string) {
+    return this.apiService.getPosts(term);
   }
+
 
   postClick(title: string) {
     this.apiService.getPost(title).subscribe(res => {
@@ -60,6 +70,7 @@ export class PostsComponent implements OnInit {
     this.apiService.addPost(title).subscribe(res => {
       this.posts.splice(0, 0, res["title"]);
       this.createStatus = false;
+      this.postClick(res["title"]);
     })
   }
 }

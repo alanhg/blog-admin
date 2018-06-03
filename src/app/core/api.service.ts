@@ -19,8 +19,12 @@ export class ApiService {
 
   }
 
-  getPosts() {
-    return this.http.get(`/api/posts`);
+  getPosts(q?: string) {
+    let url = "/api/posts";
+    if (q) {
+      url += `?q=${q}`;
+    }
+    return this.http.get(url);
   }
 
   getPost(title: string) {
