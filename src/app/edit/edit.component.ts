@@ -24,16 +24,21 @@ export class EditComponent implements OnInit {
     this.title = this.route.snapshot.paramMap.get("id");
     this.apiService.getPost(this.title).subscribe(res => {
       this.sourceCnt = res["content"];
+      this.updateView();
     })
   }
 
 
   publish() {
+    if (window.confirm("确认发布")) {
+      this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
 
+      })
+    }
   }
 
-  updateView(event) {
-    this.renderedCnt = this.converter.makeHtml(event.target.value);
+  updateView() {
+    this.renderedCnt = this.converter.makeHtml(this.sourceCnt);
   }
 
 }

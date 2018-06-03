@@ -32,6 +32,12 @@ export class ApiService {
     return this.http.delete(`/api/posts/${title}`);
   }
 
+  updatePost(title: string, content: string) {
+    return this.http.put(`/api/posts`, {
+      title: title,
+      content: content
+    });
+  }
 
   addPost() {
     return this.http.post("/mock-data/posts-mock.json", {});

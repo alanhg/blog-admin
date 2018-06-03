@@ -11,6 +11,7 @@ import {ApiService} from "./core/api.service";
 import {AuthService} from "./core/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {SafePipe} from './shared/safe.pipe';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {SafePipe} from './shared/safe.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AuthService, ApiService],

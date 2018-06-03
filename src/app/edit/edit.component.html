@@ -1,6 +1,13 @@
+<div class="row editor-top">
+  <div class="col-md-12">
+    <button class="btn btn-primary float-right" (click)="publish()">
+      发布
+    </button>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-6">
-    <textarea (change)="updateView($event)" [value]="sourceCnt">
+    <textarea class="form-control sourceCnt" (change)="updateView($event)" [(ngModel)]="sourceCnt" (ngModelChange)="updateView()">
 
     </textarea>
   </div>
@@ -8,6 +15,5 @@
     <div id="rendered" [innerHtml]="renderedCnt|safe">
 
     </div>
-
   </div>
 </div>
