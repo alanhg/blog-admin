@@ -42,4 +42,13 @@ export class PostsComponent implements OnInit {
   postEdit(title: string) {
     this.router.navigateByUrl(`/posts/${title}`);
   }
+
+
+  postDelete(title: string, index: number) {
+    if (window.confirm("确认删除?")) {
+      this.apiService.delPost(title).subscribe(res => {
+        this.posts.splice(index, 1);
+      })
+    }
+  }
 }

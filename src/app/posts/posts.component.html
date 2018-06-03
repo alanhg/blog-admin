@@ -18,10 +18,12 @@
         <li>
           <span>新建博客</span>
         </li>
-        <li *ngFor="let item of posts" (click)="postClick(item)">
+        <li *ngFor="let item of posts;let i=index" (click)="postClick(item)">
         <span>
           {{item}}
         </span>
+          <i class="fa fa-trash float-right" title="删除" (click)="postDelete(item,i)">
+          </i>
           <i class="fa fa-edit float-right" title="编辑" (click)="postEdit(item)">
           </i>
         </li>

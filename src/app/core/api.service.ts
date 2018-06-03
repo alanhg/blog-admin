@@ -28,6 +28,11 @@ export class ApiService {
   }
 
 
+  delPost(title: string) {
+    return this.http.delete(`/api/posts/${title}`);
+  }
+
+
   addPost() {
     return this.http.post("/mock-data/posts-mock.json", {});
   }
