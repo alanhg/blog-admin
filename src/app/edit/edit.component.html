@@ -1,7 +1,7 @@
 <div class="row editor-top">
   <div class="col-md-12">
     <button class="btn btn-primary float-right" (click)="publish()">
-      发布
+      {{updating.closed==true?"发布":"正在保存"}}
     </button>
   </div>
 </div>

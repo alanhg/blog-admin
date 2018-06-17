@@ -16,7 +16,6 @@ export class EditComponent implements OnInit, OnDestroy {
   sourceCnt: string;
   converter = new showdown.Converter();
   title: string;
-  internalId: number;
   updating: Subscription;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
@@ -29,13 +28,8 @@ export class EditComponent implements OnInit, OnDestroy {
       this.sourceCnt = res["content"];
       this.updateView();
     });
-    this.internalId = setInterval(() => this.savePost(), 1000);
   }
 
-  savePost() {
-    this.updating = this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
-    });
-  }
 
   publish() {
     if (window.confirm("确认发布")) {
@@ -48,10 +42,11 @@ export class EditComponent implements OnInit, OnDestroy {
 
   updateView() {
     this.renderedCnt = this.converter.makeHtml(this.sourceCnt);
+    this.updating = this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
+    });
   }
 
   ngOnDestroy() {
-    window.clearInterval(this.internalId);
   }
 
 
