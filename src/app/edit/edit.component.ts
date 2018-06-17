@@ -29,12 +29,11 @@ export class EditComponent implements OnInit, OnDestroy {
       this.sourceCnt = res["content"];
       this.updateView();
     });
-    this.internalId = window.setInterval(this.savePost(), 3600);
+    this.internalId = setInterval(() => this.savePost(), 1000);
   }
 
   savePost() {
     this.updating = this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
-
     });
   }
 

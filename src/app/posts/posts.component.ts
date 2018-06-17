@@ -79,7 +79,6 @@ export class PostsComponent implements OnInit {
     this.apiService.addPost(title).subscribe(res => {
       this.posts.splice(0, 0, res["title"]);
       this.createStatus = false;
-      // this.postClick(res["title"]);
     })
   }
 }

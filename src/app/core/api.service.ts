@@ -48,6 +48,7 @@ export class ApiService {
   }
 
   deploy() {
+    return this.http.get("/api/deploy");
 
   }
 }
