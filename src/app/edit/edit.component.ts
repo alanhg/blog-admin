@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from "../core/api.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription} from "rxjs/Subscription";
 
 declare let showdown: any;
 
@@ -9,14 +10,16 @@ declare let showdown: any;
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
 
   renderedCnt: string;
   sourceCnt: string;
   converter = new showdown.Converter();
   title: string;
+  internalId: number;
+  updating: Subscription;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
 
   }
 
@@ -25,14 +28,21 @@ export class EditComponent implements OnInit {
     this.apiService.getPost(this.title).subscribe(res => {
       this.sourceCnt = res["content"];
       this.updateView();
-    })
+    });
+    this.internalId = window.setInterval(this.savePost(), 3600);
   }
 
+  savePost() {
+    this.updating = this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
+
+    });
+  }
 
   publish() {
     if (window.confirm("确认发布")) {
-      this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
-
+      this.apiService.deploy().subscribe(res => {
+        alert("已发布");
+        this.router.navigateByUrl("/posts");
       })
     }
   }
@@ -40,5 +50,10 @@ export class EditComponent implements OnInit {
   updateView() {
     this.renderedCnt = this.converter.makeHtml(this.sourceCnt);
   }
+
+  ngOnDestroy() {
+    window.clearInterval(this.internalId);
+  }
+
 
 }
