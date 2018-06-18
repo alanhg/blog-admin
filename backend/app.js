@@ -16,14 +16,13 @@ app.use(session({
 }));
 // mount the router on the app
 app.use('/', routes);
-
 //配置静态资源
 app.use('/', express.static(path.join(__dirname, '/static')));
 
 if (!isDeveloping) {
     app.use('/', express.static(path.join(__dirname, 'dist')));
     app.get('*', function (req, res) {
-        res.sendFile('./dist/index.html');
+        res.sendFile(__dirname + '/dist/index.html');
     });
 }
 
