@@ -2,11 +2,6 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const process = require('child_process');
-
-const jwt = require("jsonwebtoken");
-const passport = require('passport');
-
-
 const POST_DIR = "/Users/alan/GitHub/alanhg.github.io/source/_posts/";
 const POST_SUFFIX = ".md";
 
@@ -79,14 +74,46 @@ router.get('/deploy', function (req, res, next) {
     res.json({status: "ok"});
 });
 
-router.post('/login',
-    passport.authenticate('local', {session: false}),
-    function (req, res) {
+/**
+ * Some hardcoded users to make the demo work
+ */
+const appUsers = {
+    'max@gmail.com': {
+        email: 'max@gmail.com',
+        name: 'Max Miller',
+        password: '1234' // YOU DO NOT WANT TO STORE PW's LIKE THIS IN REAL LIFE - HASH THEM FOR STORAGE
+    }
+};
 
+router.post('/login', (req, res) => {
+        const user = appUsers[req.body.email];
+        if (user && user.password === req.body.password) {
+            const userWithoutPassword = {...user};
+            delete userWithoutPassword.password;
+            req.session.user = userWithoutPassword;
+            res.status(200).send({
+                user: userWithoutPassword
+            });
+        } else {
+            res.status(403).send({
+                errorMessage: 'Permission denied!'
+            });
+        }
     }
 );
+
+router.get('/login', (req, res) => {
+    req.session.user ? res.status(200).send({loggedIn: true}) : res.status(200).send({loggedIn: false});
+});
+
 router.get('/logout', function (req, res) {
-    req.logout();
+    req.session.destroy((err) => {
+        if (err) {
+            res.status(500).send('Could not log out.');
+        } else {
+            res.status(200).send({});
+        }
+    });
 });
 
 module.exports = router;

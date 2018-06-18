@@ -23,18 +23,25 @@ export class LoginComponent implements OnInit {
   ) {
 
     this.userForm = this.fb.group({
-      username: ["", Validators.required],
+      email: ["", Validators.required],
       password: ["", Validators.required]
     });
+
+
+
   }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    this.apiService.login(this.userForm.value).subscribe(res => {
-      this.authService.isLoggedIn = true;
-      this.router.navigateByUrl("/posts");
-    })
+    this.apiService.login(this.userForm.value).subscribe((res) => {
+        this.authService.isLoggedIn = true;
+        this.router.navigate(["/posts"]);
+      },
+      () => {
+        alert("登录信息不正确");
+      }
+    );
   }
 }

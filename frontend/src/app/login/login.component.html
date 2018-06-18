@@ -1,9 +1,9 @@
 <div class="container">
   <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
     <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
-    <label for="username" class="sr-only">Email address</label>
-    <input type="text" id="username" class="form-control" placeholder="用户名"
-           formControlName="username">
+    <label for="email" class="sr-only">Email address</label>
+    <input type="email" id="email" class="form-control" placeholder="邮箱"
+           formControlName="email">
     <label for="password" class="sr-only">Password</label>
     <input type="password" id="password" class="form-control" placeholder="密码" formControlName="password">
     <div class="checkbox mb-3">

@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {ApiService} from "./core/api.service";
+import {AuthService} from "./core/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -8,11 +10,22 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
 
-  constructor(private router: Router) {
-
+  constructor(private router: Router, private apiService: ApiService, private authService: AuthService) {
+    this.getLogin();
   }
 
   logout() {
-    this.router.navigateByUrl("/");
+    this.apiService.logout().subscribe(() => {
+      this.router.navigateByUrl("/login");
+    });
+  }
+
+  getLogin() {
+    this.apiService.getLogin().subscribe((res: any) => {
+      if (res.loggedIn) {
+        this.authService.isLoggedIn = true;
+        this.router.navigate(["/posts"]);
+      }
+    })
   }
 }

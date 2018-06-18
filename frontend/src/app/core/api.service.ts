@@ -11,12 +11,17 @@ export class ApiService {
   }
 
 
-  login(user:any) {
+  login(user: any) {
     return this.http.post("/api/login", user);
   }
 
-  logout() {
 
+  getLogin() {
+    return this.http.get("/api/login");
+  }
+
+  logout() {
+    return this.http.get("/api/logout");
   }
 
   getPosts(q?: string) {
