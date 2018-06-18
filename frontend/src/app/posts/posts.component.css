@@ -10,6 +10,8 @@ main {
 
 #posts-list {
   background-color: #f7faff;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 #posts-list li {

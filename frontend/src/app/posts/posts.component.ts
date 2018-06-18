@@ -6,9 +6,9 @@ import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-import {AuthService} from "../core/auth.service";
 
 declare let showdown: any;
+declare let Mark: any;
 
 /**
  * 博客列表页
@@ -28,16 +28,19 @@ export class PostsComponent implements OnInit {
   queryField$ = new Subject<string>();
   selectedPost: string;
 
-
-  constructor(private apiService: ApiService, private sanitizer: DomSanitizer, private router: Router
-    , private authService: AuthService
-  ) {
+  constructor(private apiService: ApiService,
+              private sanitizer: DomSanitizer,
+              private router: Router) {
+    let keyword = "";
     this.queryField$.debounceTime(400)
       .distinctUntilChanged()
-      .switchMap(term => this.searchPost(term))
+      .switchMap(term => {
+        keyword = term;
+        return this.searchPost(term)
+      })
       .subscribe((res: any) => {
         this.posts = res["posts"];
-
+        this.performMark(keyword);
       })
   }
 
@@ -48,6 +51,15 @@ export class PostsComponent implements OnInit {
         this.getPost(this.posts[0]);
       }
     })
+  }
+
+  /**
+   * 执行高亮
+   */
+  performMark(keyword: string) {
+    let markInstance = new Mark("#posts-list");
+    markInstance.unmark();
+    markInstance.mark(keyword);
   }
 
   searchPost(term: string) {
@@ -100,5 +112,6 @@ export class PostsComponent implements OnInit {
       this.getPost(res["title"]);
     })
   }
+
 
 }

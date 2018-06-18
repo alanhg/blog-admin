@@ -39,3 +39,8 @@ header ul li a {
   color: #fff;
   background-color: transparent;
 }
+
+mark, .mark {
+  background-color: #f0ad4e;
+  padding: .2em;
+}

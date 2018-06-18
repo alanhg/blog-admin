@@ -71,7 +71,7 @@ router.delete('/posts/:title', function (req, res, next) {
  * 发布
  */
 router.get('/deploy', function (req, res, next) {
-    // process.execSync(`cd ${POST_DIR} && git add . && git commit -m 'Update post'`, 'utf-8');
+    process.execSync(`cd ${POST_DIR} && git add . && git commit -m 'Update post' && git push`, 'utf-8');
     res.json({status: "ok"});
 });
 
