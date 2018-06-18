@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const process = require('child_process');
-const POST_DIR = require("../config").postDIR;
+const POST_DIR = require("../config").postDir;
+const ROOT_DIR = require("../config").rootDir;
 const POST_SUFFIX = ".md";
 
 /**
@@ -30,7 +31,7 @@ router.get('/posts', function (req, res, next) {
 /**
  * 获取单篇博客信息
  */
-router.get('/posts/:title', function (req, res, next) {
+router.get('/posts/:title', function (req, res) {
     console.log(req.params['title']);
     const file = fs.readFileSync(
         `${POST_DIR}${req.params.title}${POST_SUFFIX}`, 'utf-8');
@@ -40,11 +41,14 @@ router.get('/posts/:title', function (req, res, next) {
 /**
  * 新建博客
  */
-router.post('/posts', function (req, res, next) {
+router.post('/posts', function (req, res) {
     if (typeof req.body.title === "undefined") {
         return res.status(400).json({error: "标题不能为空"});
     }
-    let outInfo = process.execSync(`cd ${POST_DIR} && hexo new '${req.body.title}'`, 'utf-8').toString();
+    let outInfo = process.execSync(`cd ${POST_DIR} && hexo new '${req.body.title}'`, {
+        cwd: ROOT_DIR,
+        encoding: "utf8"
+    }).toString();
     const realFileName = outInfo.substring(outInfo.lastIndexOf('/') + 1, outInfo.length - 4); // 去除末尾的/n
     console.log(realFileName);
     const content = fs.readFileSync(
@@ -70,14 +74,19 @@ router.delete('/posts/:title', function (req, res, next) {
 /**
  * 发布
  */
-router.get('/deploy', function (req, res, next) {
-    process.execSync(`git add . && git commit -m 'Update post' && git push && hexo g`, {
-        cwd: `${POST_SUFFIX}`,
-        encoding: 'utf-8'
-    });
+router.get('/deploy', function (req, res) {
+    let result;
+    try {
+        result = process.execSync(`git add . && git commit -m 'Update post' && git push && hexo g`, {
+            cwd: `${ROOT_DIR}`,
+            encoding: 'utf8'
+        });
+    } catch (ex) {
+        result = ex.stdout;
+    }
+    console.log(result);
     res.json({status: "ok"});
 });
-
 /**
  * Some hardcoded users to make the demo work
  */

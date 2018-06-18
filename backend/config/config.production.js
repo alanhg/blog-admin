@@ -7,6 +7,7 @@ const config = {
         port: 3100,
         secret: 'kLand-campus'
     },
-    postDIR: "/var/www/alanhg.github.io/source/_posts/"
+    rootDir: "/var/www/alanhg.github.io/",
+    postDir: "/var/www/alanhg.github.io/source/_posts/"
 };
 module.exports = config;
