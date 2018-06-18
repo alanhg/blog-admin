@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.apiService.login(this.userForm.value).subscribe((res) => {
-        this.authService.isLoggedIn = true;
+        this.authService.loggedIn .next(true);
         this.router.navigate(["/posts"]);
       },
       () => {

@@ -1,16 +1,23 @@
-<header class="navbar app-navbar">
-  <ul class="navbar-nav flex-row">
+<header class="navbar app-navbar" *ngIf="loggedIn===true">
+  <div class="navbar-nav-scroll">
+    <ul class="navbar-nav flex-row">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/posts">博客</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/about">关于</a>
+      </li>
+    </ul>
+  </div>
+  <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/posts">博客</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/about">关于</a>
+      <a class="btn btn-link" (click)="logout()">
+        退出
+      </a>
     </li>
   </ul>
-  <a (click)="logout()">
-    退出
-  </a>
 </header>
+
 <router-outlet>
 
 </router-outlet>

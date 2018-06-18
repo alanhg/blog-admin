@@ -6,6 +6,7 @@ import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import {AuthService} from "../core/auth.service";
 
 declare let showdown: any;
 
@@ -26,7 +27,9 @@ export class PostsComponent implements OnInit {
 
   queryField$ = new Subject<string>();
 
-  constructor(private apiService: ApiService, private sanitizer: DomSanitizer, private router: Router) {
+  constructor(private apiService: ApiService, private sanitizer: DomSanitizer, private router: Router
+    , private authService: AuthService
+  ) {
     this.queryField$.debounceTime(400).distinctUntilChanged().switchMap(term => this.searchPost(term)).subscribe(res => {
       this.posts = res["posts"];
     })
@@ -81,4 +84,6 @@ export class PostsComponent implements OnInit {
       this.createStatus = false;
     })
   }
+
+
 }

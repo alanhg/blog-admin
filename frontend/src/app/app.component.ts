@@ -9,23 +9,32 @@ import {AuthService} from "./core/auth.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  loggedIn;
 
   constructor(private router: Router, private apiService: ApiService, private authService: AuthService) {
+    this.authService.loggedIn.subscribe(res => {
+      this.loggedIn = res;
+    });
     this.getLogin();
+  }
+
+
+  getLogin() {
+    this.apiService.getLogin().subscribe((res: any) => {
+      this.authService.loggedIn.next(res.loggedIn);
+      if (res.loggedIn) {
+        this.router.navigate(["/posts"]);
+      }
+      else {
+        this.router.navigate(["/login"]);
+      }
+    })
   }
 
   logout() {
     this.apiService.logout().subscribe(() => {
+      this.authService.loggedIn.next(false);
       this.router.navigateByUrl("/login");
     });
-  }
-
-  getLogin() {
-    this.apiService.getLogin().subscribe((res: any) => {
-      if (res.loggedIn) {
-        this.authService.isLoggedIn = true;
-        this.router.navigate(["/posts"]);
-      }
-    })
   }
 }
