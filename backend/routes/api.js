@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const process = require('child_process');
-const POST_DIR = "/Users/alan/GitHub/alanhg.github.io/source/_posts/";
+const POST_DIR = require("../config").postDIR;
 const POST_SUFFIX = ".md";
 
 /**
