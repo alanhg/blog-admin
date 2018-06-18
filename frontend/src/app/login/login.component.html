@@ -1,0 +1,17 @@
+<div class="container">
+  <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+    <label for="username" class="sr-only">Email address</label>
+    <input type="text" id="username" class="form-control" placeholder="用户名"
+           formControlName="username">
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" class="form-control" placeholder="密码" formControlName="password">
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me">记住我
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!userForm.valid">登录</button>
+    <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+  </form>
+</div>
