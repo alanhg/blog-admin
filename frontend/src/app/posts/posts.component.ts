@@ -26,32 +26,39 @@ export class PostsComponent implements OnInit {
   createStatus = false;
 
   queryField$ = new Subject<string>();
+  selectedPost: string;
+
 
   constructor(private apiService: ApiService, private sanitizer: DomSanitizer, private router: Router
     , private authService: AuthService
   ) {
-    this.queryField$.debounceTime(400).distinctUntilChanged().switchMap(term => this.searchPost(term)).subscribe(res => {
-      this.posts = res["posts"];
-    })
+    this.queryField$.debounceTime(400)
+      .distinctUntilChanged()
+      .switchMap(term => this.searchPost(term))
+      .subscribe((res: any) => {
+        this.posts = res["posts"];
+
+      })
   }
 
   ngOnInit() {
     this.apiService.getPosts().subscribe(res => {
       this.posts = res["posts"];
+      if (this.posts.length > 0) {
+        this.getPost(this.posts[0]);
+      }
     })
   }
 
   searchPost(term: string) {
-    return this.apiService.getPosts(term);
+    return this.apiService.getPosts(term.toLowerCase());
   }
 
 
   postClick(event, title: string, i: number) {
     const targetElement = event.target;
     if (targetElement.tagName != "I") {
-      this.apiService.getPost(title).subscribe(res => {
-        this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res["content"]))
-      })
+      this.getPost(title);
     }
     else if (targetElement.className.includes("fa-trash")) {
       this.postDelete(title, i);
@@ -59,6 +66,14 @@ export class PostsComponent implements OnInit {
     else {
       this.postEdit(title);
     }
+  }
+
+
+  getPost(title: string) {
+    this.selectedPost = title;
+    this.apiService.getPost(title).subscribe(res => {
+      this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res["content"]))
+    })
   }
 
 
@@ -79,11 +94,11 @@ export class PostsComponent implements OnInit {
     if (title.trim() === "") {
       return
     }
-    this.apiService.addPost(title).subscribe(res => {
+    this.apiService.addPost(title).subscribe((res: any) => {
       this.posts.splice(0, 0, res["title"]);
       this.createStatus = false;
+      this.getPost(res["title"]);
     })
   }
-
 
 }

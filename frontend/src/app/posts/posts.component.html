@@ -18,7 +18,8 @@
         </div>
       </ng-template>
       <ul id="posts-list" class="list-unstyled">
-        <li *ngFor="let item of posts;let i=index" (click)="postClick($event,item,i)">
+        <li *ngFor="let item of posts;let i=index" (click)="postClick($event,item,i)"
+            [ngClass]="{'post-selected':selectedPost===item}">
         <span title="{{item}}">
           {{item}}
         </span>

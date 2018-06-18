@@ -22,7 +22,7 @@ router.get('/posts', function (req, res, next) {
             return v.name.substring(0, v.name.lastIndexOf("."))
         });
     if (req.query.q) {
-        files = files.filter((it) => it.includes(req.query.q));
+        files = files.filter((it) => it.toLowerCase().includes(req.query.q));
     }
     res.send({posts: files, count: files.length});
 });
@@ -45,9 +45,10 @@ router.post('/posts', function (req, res, next) {
         return res.status(400).json({error: "标题不能为空"});
     }
     let outInfo = process.execSync(`cd ${POST_DIR} && hexo new '${req.body.title}'`, 'utf-8').toString();
-    const realFileName = outInfo.substring(outInfo.lastIndexOf('/') + 1, outInfo.length - 1); // 去除末尾的/n
+    const realFileName = outInfo.substring(outInfo.lastIndexOf('/') + 1, outInfo.length - 4); // 去除末尾的/n
+    console.log(realFileName);
     const content = fs.readFileSync(
-        `${POST_DIR}${realFileName}`, 'utf-8');
+        `${POST_DIR}${realFileName}${POST_SUFFIX}`, 'utf-8');
     res.json({title: realFileName, content: content});
 });
 
