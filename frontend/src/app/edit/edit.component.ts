@@ -1,10 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../core/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
+import {ProgressBarService} from "../core/progress-bar.service";
+import {ModalDirective} from "ngx-bootstrap";
 
 declare let showdown: any;
 
+/**
+ * 双屏显示博客原文及渲染后页面
+ */
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -17,8 +22,12 @@ export class EditComponent implements OnInit, OnDestroy {
   converter = new showdown.Converter();
   title: string;
   updating: Subscription;
+  @ViewChild("successModal") successModal: ModalDirective;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
+  constructor(private apiService: ApiService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private progressBarService: ProgressBarService) {
 
   }
 
@@ -32,13 +41,18 @@ export class EditComponent implements OnInit, OnDestroy {
 
 
   publish() {
-    if (window.confirm("确认发布")) {
-      this.apiService.deploy().subscribe(res => {
-        alert("已发布");
-        this.router.navigateByUrl("/posts");
-      })
-    }
+    this.progressBarService.show(true);
+    this.apiService.deploy().subscribe(res => {
+      this.progressBarService.show(false);
+      this.successModal.show();
+    })
   }
+
+  confirm() {
+    this.successModal.hide();
+    this.router.navigateByUrl("/posts");
+  }
+
 
   updateView() {
     this.renderedCnt = this.converter.makeHtml(this.sourceCnt);
@@ -48,6 +62,5 @@ export class EditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
   }
-
 
 }

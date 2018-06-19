@@ -17,6 +17,8 @@
     </li>
   </ul>
 </header>
+<progressbar *ngIf="hideProgress!==true" class="progress-striped active" [value]="100" [animate]="true" [max]="100"
+             [striped]="true"></progressbar>
 
 <router-outlet>
 

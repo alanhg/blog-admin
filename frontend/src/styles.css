@@ -61,3 +61,11 @@ mark, .mark {
   margin: 0 auto;
   width: 50%;
 }
+
+.progress {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: .6;
+  height: .5rem;
+}

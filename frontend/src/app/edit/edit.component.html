@@ -1,6 +1,6 @@
 <div class="row editor-top">
   <div class="col-md-12">
-    <button class="btn btn-primary float-right" (click)="publish()">
+    <button class="btn btn-primary float-right" (click)="confirmModal.show()">
       发布
     </button>
   </div>
@@ -14,6 +14,28 @@
   <div class="col-md-6">
     <div id="rendered" [innerHtml]="renderedCnt|safe" class="rendered-post">
 
+    </div>
+  </div>
+</div>
+<div class="modal fade" bsModal #confirmModal="bs-modal" [config]="{backdrop:'static'}">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <p>确定要发布?</p>
+        <button type="button" class="btn btn-primary" (click)="publish()">确定</button>
+        <button type="button" class="btn btn-secondary" (click)="confirmModal.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" bsModal #successModal="bs-modal" [config]="{backdrop:'static'}">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <p>发布成功!</p>
+        <a class="btn btn-primary" href="https://1991421.cn" target="_blank">去看看</a>
+        <button type="button" class="btn btn-secondary" (click)="confirm()">确定</button>
+      </div>
     </div>
   </div>
 </div>

@@ -13,7 +13,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {SafePipe} from './shared/safe.pipe';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./auth.guard";
-import {ModalModule} from "ngx-bootstrap";
+import {ModalModule, ProgressbarModule} from "ngx-bootstrap";
+import {ProgressBarService} from "./core/progress-bar.service";
 
 
 @NgModule({
@@ -31,10 +32,17 @@ import {ModalModule} from "ngx-bootstrap";
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
-  providers: [AuthService, ApiService, AuthGuard],
+  providers: [
+    AuthService,
+    ApiService,
+    AuthGuard,
+    ProgressBarService
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }
