@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "./core/api.service";
 import {AuthService} from "./core/auth.service";
 import {ProgressBarService} from "./core/progress-bar.service";
@@ -16,6 +16,7 @@ export class AppComponent {
   hideProgress: boolean = true;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private apiService: ApiService,
               private authService: AuthService,
               private progressBarService: ProgressBarService
@@ -33,12 +34,6 @@ export class AppComponent {
   getLogin() {
     this.apiService.getLogin().subscribe((res: any) => {
       this.authService.loggedIn.next(res.loggedIn);
-      if (res.loggedIn) {
-        this.router.navigate(["/posts"]);
-      }
-      else {
-        this.router.navigate(["/login"]);
-      }
     })
   }
 
