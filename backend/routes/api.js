@@ -12,18 +12,22 @@ const POST_SUFFIX = ".md";
 router.get('/posts', function (req, res, next) {
     let files = fs.readdirSync(POST_DIR).map(function (v) {
             return {
-                name: v,
-                time: fs.statSync(POST_DIR + v).mtime.getTime()
+                title: v,
+                time: fs.statSync(POST_DIR + v).mtime.getTime(),
+                createTime: fs.statSync(POST_DIR + v).ctime
             }
         }
-    ).filter((it) => !it.name.startsWith('.'))
+    ).filter((it) => !it.title.startsWith('.'))
         .sort(function (a, b) {
             return b.time - a.time;
         }).map(function (v) {
-            return v.name.substring(0, v.name.lastIndexOf("."))
+            return {
+                title: v.title.substring(0, v.title.lastIndexOf(".")),
+                createTime: v.createTime
+            }
         });
     if (req.query.q) {
-        files = files.filter((it) => it.toLowerCase().includes(req.query.q));
+        files = files.filter((it) => it.title.toLowerCase().includes(req.query.q));
     }
     res.send({posts: files, count: files.length});
 });

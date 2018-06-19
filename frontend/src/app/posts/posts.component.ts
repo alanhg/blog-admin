@@ -21,7 +21,7 @@ declare let Mark: any;
 })
 export class PostsComponent implements OnInit {
 
-  posts: Array<string> = [];
+  posts: Array<any> = [];
   postHtml: SafeHtml;
   converter = new showdown.Converter();
   createStatus = false;

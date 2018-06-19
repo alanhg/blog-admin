@@ -34,6 +34,9 @@ export class AppComponent {
   getLogin() {
     this.apiService.getLogin().subscribe((res: any) => {
       this.authService.loggedIn.next(res.loggedIn);
+      if (!res.loggedIn) {
+        this.router.navigate(['/login']);
+      }
     })
   }
 

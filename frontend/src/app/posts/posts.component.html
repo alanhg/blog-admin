@@ -19,11 +19,14 @@
         </div>
       </ng-template>
       <ul id="posts-list" class="list-unstyled">
-        <li *ngFor="let item of posts;let i=index" (click)="postClick($event,item,i)"
+        <li *ngFor="let item of posts;let i=index" (click)="postClick($event,item.title,i)"
             [ngClass]="{'post-selected':selectedPost===item}">
-        <span title="{{item}}">
-          {{item}}
+        <span title="{{item.title}}">
+          {{item.title}}
         </span>
+          <span class="post-date">
+          {{item.createTime|date:"M/d/yy" }}
+          </span>
           <i class="fa fa-trash float-right" title="删除">
           </i>
           <i class="fa fa-edit float-right" title="编辑">
