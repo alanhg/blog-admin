@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {SafePipe} from './shared/safe.pipe';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./auth.guard";
+import {ModalModule} from "ngx-bootstrap";
 
 
 @NgModule({
@@ -29,9 +30,10 @@ import {AuthGuard} from "./auth.guard";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ModalModule.forRoot()
   ],
-  providers: [AuthService, ApiService,AuthGuard],
+  providers: [AuthService, ApiService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

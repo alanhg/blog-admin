@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../core/api.service";
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 import {Router} from "@angular/router";
@@ -6,6 +6,7 @@ import {Subject} from "rxjs/Subject";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
+import {ModalDirective} from "ngx-bootstrap";
 
 declare let showdown: any;
 declare let Mark: any;
@@ -28,10 +29,14 @@ export class PostsComponent implements OnInit {
   queryField$ = new Subject<string>();
   queryField = "";
   selectedPost: string;
+  @ViewChild("confirmModal") confirmModal: ModalDirective;
+
+  deleteItem: any;
 
   constructor(private apiService: ApiService,
               private sanitizer: DomSanitizer,
-              private router: Router) {
+              private router: Router
+  ) {
     this.queryField$.debounceTime(400)
       .distinctUntilChanged()
       .switchMap(term => {
@@ -78,7 +83,8 @@ export class PostsComponent implements OnInit {
       this.getPost(title);
     }
     else if (targetElement.className.includes("fa-trash")) {
-      this.postDelete(title, i);
+      this.deleteItem = {title: title, index: i};
+      this.confirmModal.show();
     }
     else {
       this.postEdit(title);
@@ -100,11 +106,9 @@ export class PostsComponent implements OnInit {
 
 
   postDelete(title: string, index: number) {
-    if (window.confirm("确认删除?")) {
-      this.apiService.delPost(title).subscribe(res => {
-        this.posts.splice(index, 1);
-      })
-    }
+    this.apiService.delPost(title).subscribe(res => {
+      this.posts.splice(index, 1);
+    })
   }
 
   createPost(title: string) {
@@ -122,5 +126,11 @@ export class PostsComponent implements OnInit {
     this.queryField = "";
     this.queryField$.next(null);
   }
+
+  confirm() {
+    this.confirmModal.hide();
+    this.postDelete(this.deleteItem.title, this.deleteItem.index);
+  }
+
 
 }

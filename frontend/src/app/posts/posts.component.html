@@ -37,3 +37,15 @@
     </main>
   </div>
 </div>
+
+<div class="modal fade" bsModal #confirmModal="bs-modal" [config]="{backdrop:'static'}">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <p>确定要删除?</p>
+        <button type="button" class="btn btn-default" (click)="confirm()">确定</button>
+        <button type="button" class="btn btn-primary" (click)="confirmModal.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
