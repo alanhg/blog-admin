@@ -2,8 +2,9 @@
   <div class="row">
     <div class="col-md-3 app-sidebar">
       <div class="post-search">
-        <input type="search" class="form-control" placeholder="搜索文章，共{{posts.length}}篇"
+        <input type="search" class="form-control search" placeholder="搜索文章，共{{posts.length}}篇" required
                (keyup)="queryField$.next($event.target.value)">
+        <a class="fa fa-times input-clear"></a>
       </div>
       <div *ngIf="createStatus==false;else elseBlock">
         <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">新建博客</button>
@@ -31,7 +32,7 @@
       </ul>
     </div>
     <main class="col-md-9">
-      <div id="post-content" [innerHtml]="postHtml">
+      <div id="post-content" [innerHtml]="postHtml" class="rendered-post">
       </div>
     </main>
   </div>

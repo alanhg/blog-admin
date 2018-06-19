@@ -45,3 +45,15 @@ main {
 .post-selected {
   background-color: #dfebff;
 }
+
+.input-clear {
+  display: none;
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  font-size: 1.2rem;
+}
+
+.search:valid + .input-clear {
+  display: inline;
+}
