@@ -48,6 +48,7 @@ main {
 
 .input-clear {
   display: none;
+  cursor: pointer;
   position: absolute;
   top: 26px;
   right: 30px;

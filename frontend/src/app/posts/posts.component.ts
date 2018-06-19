@@ -26,21 +26,21 @@ export class PostsComponent implements OnInit {
   createStatus = false;
 
   queryField$ = new Subject<string>();
+  queryField = "";
   selectedPost: string;
 
   constructor(private apiService: ApiService,
               private sanitizer: DomSanitizer,
               private router: Router) {
-    let keyword = "";
     this.queryField$.debounceTime(400)
       .distinctUntilChanged()
       .switchMap(term => {
-        keyword = term;
+        this.queryField = term;
         return this.searchPost(term)
       })
       .subscribe((res: any) => {
         this.posts = res["posts"];
-        this.performMark(keyword);
+        this.performMark(this.queryField);
       })
   }
 
@@ -59,11 +59,16 @@ export class PostsComponent implements OnInit {
   performMark(keyword: string) {
     let markInstance = new Mark("#posts-list");
     markInstance.unmark();
-    markInstance.mark(keyword);
+    if (keyword) {
+      markInstance.mark(keyword);
+    }
   }
 
   searchPost(term: string) {
-    return this.apiService.getPosts(term.toLowerCase());
+    if (term) {
+      term = term.toLowerCase()
+    }
+    return this.apiService.getPosts(term);
   }
 
 
@@ -113,5 +118,9 @@ export class PostsComponent implements OnInit {
     })
   }
 
+  clearQueryField() {
+    this.queryField = "";
+    this.queryField$.next(null);
+  }
 
 }
