@@ -41,8 +41,9 @@ export class ApiService {
     return this.http.delete(`/api/posts/${title}`);
   }
 
-  updatePost(title: string, content: string) {
+  updatePost(oldTitle: string, title: string, content: string) {
     return this.http.put(`/api/posts`, {
+      oldTitle: oldTitle,
       title: title,
       content: content
     });

@@ -1,15 +1,15 @@
 <div class="row editor-top">
   <div class="col-md-12">
-    <input type="text" class="form-control">
-    <button class="btn btn-primary float-right" (click)="confirmModal.show()">
+    <input #postTitle type="text" class="form-control" [(ngModel)]="title"
+           (ngModelChange)="title$.next(postTitle.value)">
+    <button class="btn btn-primary float-right publish-btn" (click)="confirmModal.show()">
       发布
     </button>
   </div>
 </div>
 <div class="row">
   <div class="col-md-6">
-    <textarea class="form-control sourceCnt" [(ngModel)]="sourceCnt"
-              (ngModelChange)="updateView()">
+    <textarea #postContent class="form-control sourceCnt" [(ngModel)]="sourceCnt" (ngModelChange)="updateView()">
     </textarea>
   </div>
   <div class="col-md-6">

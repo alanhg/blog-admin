@@ -32,10 +32,9 @@ router.get('/posts', function (req, res, next) {
  * 获取单篇博客信息
  */
 router.get('/posts/:title', function (req, res) {
-    console.log(req.params['title']);
     const file = fs.readFileSync(
         `${POST_DIR}${req.params.title}${POST_SUFFIX}`, 'utf-8');
-    res.json({content: file});
+    res.json({content: file, title: req.params.title});
 });
 
 /**
@@ -50,7 +49,6 @@ router.post('/posts', function (req, res) {
         encoding: "utf8"
     }).toString();
     const realFileName = outInfo.substring(outInfo.lastIndexOf('/') + 1, outInfo.length - 4); // 去除末尾的/n
-    console.log(realFileName);
     const content = fs.readFileSync(
         `${POST_DIR}${realFileName}${POST_SUFFIX}`, 'utf-8');
     res.json({title: realFileName, content: content});
@@ -60,7 +58,8 @@ router.post('/posts', function (req, res) {
  * 更新单篇博客
  */
 router.put('/posts', function (req, res) {
-    fs.writeFileSync(`${POST_DIR}${req.body.title}${POST_SUFFIX}`, req.body.content);
+    fs.writeFileSync(`${POST_DIR}${req.body.oldTitle}${POST_SUFFIX}`, req.body.content);
+    fs.renameSync(`${POST_DIR}${req.body.oldTitle}${POST_SUFFIX}`, `${POST_DIR}${req.body.title}${POST_SUFFIX}`);
     res.json({status: "ok"});
 });
 
@@ -84,7 +83,6 @@ router.get('/deploy', function (req, res) {
     } catch (ex) {
         result = ex.stdout;
     }
-    console.log(result);
     res.json({status: "ok"});
 });
 /**

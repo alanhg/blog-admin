@@ -13,7 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {SafePipe} from './shared/safe.pipe';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./auth.guard";
-import {ModalModule, ProgressbarModule} from "ngx-bootstrap";
+import {BsDropdownModule, ModalModule, ProgressbarModule} from "ngx-bootstrap";
 import {ProgressBarService} from "./core/progress-bar.service";
 
 
@@ -33,7 +33,8 @@ import {ProgressBarService} from "./core/progress-bar.service";
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     ModalModule.forRoot(),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [
     AuthService,

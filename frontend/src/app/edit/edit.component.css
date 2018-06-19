@@ -4,4 +4,19 @@
 
 .editor-top {
   border-bottom: 3px solid #2f6f9f;
+  padding: 5px;
+}
+
+.editor-top input {
+  border: none;
+}
+
+.editor-top input:focus {
+  box-shadow: none;
+}
+
+.publish-btn {
+  position: absolute;
+  top: 0;
+  right: 15px;
 }
