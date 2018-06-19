@@ -4,6 +4,8 @@ import {ApiService} from "./core/api.service";
 import {AuthService} from "./core/auth.service";
 import {ProgressBarService} from "./core/progress-bar.service";
 
+declare let showdown: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,7 +24,9 @@ export class AppComponent {
       this.loggedIn = res;
     });
     this.getLogin();
-    this.progressBarService.isHiden.subscribe(res => this.hideProgress = res)
+    this.progressBarService.isHiden.subscribe(res => this.hideProgress = res);
+    showdown.setFlavor('github');
+    showdown.setOption('openLinksInNewWindow', true);
   }
 
 

@@ -46,7 +46,7 @@ export class PostsComponent implements OnInit {
       .subscribe((res: any) => {
         this.posts = res["posts"];
         this.performMark(this.queryField);
-      })
+      });
   }
 
   ngOnInit() {
