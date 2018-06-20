@@ -13,6 +13,7 @@ main {
   height: 100vh;
   overflow-y: auto;
   font-size: 1.1rem;
+  margin-right: -10px;
 }
 
 #posts-list li {
