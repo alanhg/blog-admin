@@ -5,7 +5,6 @@ import {Subscription} from "rxjs/Subscription";
 import {ProgressBarService} from "../core/progress-bar.service";
 import {ModalDirective} from "ngx-bootstrap";
 import {Subject} from "rxjs/Subject";
-import {Observable} from "rxjs/Observable";
 import 'rxjs/add/observable/combineLatest';
 
 declare let showdown: any;
@@ -36,7 +35,7 @@ export class EditComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private progressBarService: ProgressBarService) {
-    Observable.combineLatest(this.title$, this.sourceCnt$).debounceTime(400).subscribe(res => {
+    this.sourceCnt$.debounceTime(400).subscribe(res => {
       this.savePost();
     })
   }
@@ -80,7 +79,7 @@ export class EditComponent implements OnInit, OnDestroy {
    * 保存文章
    */
   savePost() {
-    this.updating = this.apiService.updatePost(this.route.snapshot.paramMap.get("title"), this.title, this.sourceCnt).subscribe(res => {
+    this.updating = this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
       this.router.navigate(["/posts/", this.title]);
     });
   }

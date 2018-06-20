@@ -13,7 +13,7 @@ router.get('/posts', function (req, res, next) {
     let files = fs.readdirSync(POST_DIR).map(function (v) {
             return {
                 title: v,
-                time: fs.statSync(POST_DIR + v).mtime.getTime(),
+                time: fs.statSync(POST_DIR + v).ctime.getTime(),
                 createTime: fs.statSync(POST_DIR + v).ctime
             }
         }
@@ -62,8 +62,7 @@ router.post('/posts', function (req, res) {
  * 更新单篇博客
  */
 router.put('/posts', function (req, res) {
-    fs.writeFileSync(`${POST_DIR}${req.body.oldTitle}${POST_SUFFIX}`, req.body.content);
-    fs.renameSync(`${POST_DIR}${req.body.oldTitle}${POST_SUFFIX}`, `${POST_DIR}${req.body.title}${POST_SUFFIX}`);
+    fs.writeFileSync(`${POST_DIR}${req.body.title}${POST_SUFFIX}`, req.body.content);
     res.json({status: "ok"});
 });
 
