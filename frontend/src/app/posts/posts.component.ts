@@ -53,7 +53,7 @@ export class PostsComponent implements OnInit {
     this.apiService.getPosts().subscribe(res => {
       this.posts = res["posts"];
       if (this.posts.length > 0) {
-        this.getPost(this.posts[0]);
+        this.getPost(this.posts[0].title);
       }
     })
   }
