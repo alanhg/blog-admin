@@ -6,13 +6,13 @@
     </button>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-6">
+<div class="post-containers">
+  <div class="post-container">
     <textarea #postContent class="form-control sourceCnt" [(ngModel)]="sourceCnt" (ngModelChange)="updateView()">
     </textarea>
   </div>
-  <div class="col-md-6">
-    <div id="rendered" [innerHtml]="renderedCnt|safe" class="rendered-post">
+  <div class="post-container">
+    <div [innerHtml]="renderedCnt|safe" class="rendered rendered-post">
 
     </div>
   </div>
