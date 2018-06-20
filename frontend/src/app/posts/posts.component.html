@@ -2,9 +2,12 @@
   <div class="row">
     <div class="col-md-3 app-sidebar">
       <div class="post-search">
-        <input type="search" class="form-control search" placeholder="搜索文章，共{{posts.length}}篇" required
+        <input type="search" class="form-control search" required
                (keyup)="queryField$.next($event.target.value)" [value]="queryField">
-        <a class="fa fa-times input-clear" (click)="clearQueryField()"></a>
+        <a class="fa fa-times input-clear search-tip" (click)="clearQueryField()"></a>
+        <span class="search-tip post-sum-info">
+          共{{posts.length}}篇
+        </span>
       </div>
       <div *ngIf="createStatus==false;else elseBlock">
         <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">新建博客</button>

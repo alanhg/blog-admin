@@ -51,13 +51,21 @@ main {
   background-color: #dfebff;
 }
 
-.input-clear {
-  display: none;
-  cursor: pointer;
+.search-tip {
   position: absolute;
   top: 26px;
+}
+
+.search-tip.input-clear {
+  display: none;
+  cursor: pointer;
   right: 30px;
   font-size: 1.2rem;
+}
+
+.search-tip.post-sum-info {
+  color: #A9A9A9;
+  right: 60px;
 }
 
 .search:valid + .input-clear {
