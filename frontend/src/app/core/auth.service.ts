@@ -6,11 +6,16 @@ import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class AuthService {
-  loggedIn: Subject<boolean>;
+  loggedIn$ = new Subject<boolean>();
+  loggedIn = false;
   redirectUrl: string;
 
   constructor() {
-    this.loggedIn = new Subject();
+  }
+
+  updateStatus(logggedIn: boolean) {
+    this.loggedIn$.next(logggedIn);
+    this.loggedIn = logggedIn;
   }
 
 }

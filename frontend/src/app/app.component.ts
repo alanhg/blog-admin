@@ -21,7 +21,7 @@ export class AppComponent {
               private authService: AuthService,
               private progressBarService: ProgressBarService
   ) {
-    this.authService.loggedIn.subscribe(res => {
+    this.authService.loggedIn$.subscribe(res => {
       this.loggedIn = res;
     });
     this.getLogin();
@@ -33,16 +33,13 @@ export class AppComponent {
 
   getLogin() {
     this.apiService.getLogin().subscribe((res: any) => {
-      this.authService.loggedIn.next(res.loggedIn);
-      if (!res.loggedIn) {
-        this.router.navigate(['/login']);
-      }
+      this.authService.updateStatus(true);
     })
   }
 
   logout() {
     this.apiService.logout().subscribe(() => {
-      this.authService.loggedIn.next(false);
+      this.authService.updateStatus(false);
       this.router.navigateByUrl("/login");
     });
   }

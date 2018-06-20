@@ -24,11 +24,9 @@ export class LoginComponent implements OnInit {
 
     this.userForm = this.fb.group({
       email: ["", Validators.required],
-      password: ["", Validators.required]
+      password: ["", Validators.required],
+      rememberMe: [true]
     });
-
-
-
   }
 
   ngOnInit() {
@@ -36,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.apiService.login(this.userForm.value).subscribe((res) => {
-        this.authService.loggedIn .next(true);
+        this.authService.updateStatus(true);
         this.router.navigate(["/posts"]);
       },
       () => {
