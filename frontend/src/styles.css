@@ -70,3 +70,9 @@ mark, .mark {
   opacity: .6;
   height: .5rem;
 }
+
+.wordcount {
+  position: absolute;
+  right: 20px;
+  color: gray;
+}

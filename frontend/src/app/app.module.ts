@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./auth.guard";
 import {BsDropdownModule, ModalModule, ProgressbarModule} from "ngx-bootstrap";
 import {ProgressBarService} from "./core/progress-bar.service";
+import { WordcountPipe } from './shared/wordcount.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {ProgressBarService} from "./core/progress-bar.service";
     PostsComponent,
     EditComponent,
     AboutComponent,
-    SafePipe
+    SafePipe,
+    WordcountPipe
   ],
   imports: [
     BrowserModule,

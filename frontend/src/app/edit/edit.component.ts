@@ -20,7 +20,7 @@ declare let showdown: any;
 })
 export class EditComponent implements OnInit, OnDestroy {
 
-  renderedCnt: string;
+  renderedCnt = "";
   converter = new showdown.Converter();
   updating: Subscription;
   @ViewChild("successModal") successModal: ModalDirective;
