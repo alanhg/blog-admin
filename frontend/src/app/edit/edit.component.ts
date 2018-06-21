@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../core/api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
@@ -34,6 +34,8 @@ export class EditComponent implements OnInit, OnDestroy {
 
   title$ = new Subject<string>();
   sourceCnt$ = new Subject<string>();
+
+  @ViewChild("rendered") rendered: ElementRef;
 
   constructor(private apiService: ApiService,
               private route: ActivatedRoute,
@@ -87,6 +89,11 @@ export class EditComponent implements OnInit, OnDestroy {
       this.router.navigate(["/posts/", this.title]);
     });
   }
+
+  editorScrolled(event) {
+    this.rendered.nativeElement.scrollTop = event.target.scrollTop;
+  }
+
 
   ngOnDestroy() {
   }

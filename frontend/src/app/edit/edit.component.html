@@ -8,14 +8,14 @@
 </div>
 <div class="post-containers">
   <div class="post-container">
-    <textarea #postContent class="form-control sourceCnt" [(ngModel)]="sourceCnt" (ngModelChange)="updateView()">
+    <textarea #postContent class="form-control sourceCnt" [(ngModel)]="sourceCnt" (ngModelChange)="updateView()" (scroll)="editorScrolled($event)">
     </textarea>
   </div>
   <div class="post-container">
     <div class="wordcount">
       {{renderedCnt|wordcount}}字
     </div>
-    <div [innerHtml]="renderedCnt|safe" class="rendered rendered-post">
+    <div [innerHtml]="renderedCnt|safe" class="rendered rendered-post" #rendered>
 
     </div>
   </div>
