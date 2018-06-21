@@ -64,7 +64,6 @@ export class EditComponent implements OnInit, OnDestroy {
    */
   confirm() {
     this.successModal.hide();
-    this.router.navigateByUrl("/posts");
   }
 
   /**
