@@ -6,7 +6,7 @@ import {ProgressBarService} from "../core/progress-bar.service";
 import {ModalDirective} from "ngx-bootstrap";
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/observable/combineLatest';
-import * as showdownHighlight from "showdown-highlight/lib";
+import * as showdownHighlight from "showdown-highlight";
 
 declare let showdown: any;
 
