@@ -28,7 +28,7 @@ export class EditComponent implements OnInit, OnDestroy {
   });
   updating: Subscription;
   @ViewChild("successModal") successModal: ModalDirective;
-
+  @ViewChild("confirmModal") confirmModal: ModalDirective;
   title: string;
   sourceCnt: string;
 
@@ -59,6 +59,7 @@ export class EditComponent implements OnInit, OnDestroy {
     this.progressBarService.show(true);
     this.apiService.deploy().subscribe(res => {
       this.progressBarService.show(false);
+      this.confirmModal.hide();
       this.successModal.show();
     })
   }
