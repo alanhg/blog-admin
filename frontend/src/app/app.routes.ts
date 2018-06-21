@@ -23,6 +23,7 @@ export const appRoutes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "about", component: AboutComponent
+    path: "about", component: AboutComponent,
+    canActivate: [AuthGuard]
   },
 ];

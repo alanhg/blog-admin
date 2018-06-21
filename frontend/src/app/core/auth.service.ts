@@ -7,7 +7,7 @@ import {Subject} from "rxjs/Subject";
 @Injectable()
 export class AuthService {
   loggedIn$ = new Subject<boolean>();
-  loggedIn = false;
+  loggedIn: boolean;
   redirectUrl: string;
 
   constructor() {

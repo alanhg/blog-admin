@@ -21,6 +21,7 @@ header {
 
 header ul li a {
   color: white;
+  cursor: pointer;
 }
 
 .app-navbar {

@@ -3,6 +3,7 @@ import {ApiService} from "../core/api.service";
 import {AuthService} from "../core/auth.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {LocalSettingService} from "../core/localSetting.service";
 
 /**
  *
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.apiService.login(this.userForm.value).subscribe((res) => {
         this.authService.updateStatus(true);
+        LocalSettingService.setLoginStatus(true);
         this.router.navigate(["/posts"]);
       },
       () => {

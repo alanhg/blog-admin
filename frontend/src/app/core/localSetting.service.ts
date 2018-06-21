@@ -3,11 +3,11 @@
  */
 export class LocalSettingService {
 
-  static setToken(token: string): void {
-    localStorage.setItem("token", token);
+  static setLoginStatus(value: boolean) {
+    localStorage.setItem("loggedIn", String(value));
   }
 
-  static getToken(): string {
-    return localStorage.getItem("token");
+  static getLoginStatus() {
+    return (localStorage.getItem("loggedIn")) == "true";
   }
 }
