@@ -31,8 +31,19 @@ export class AppComponent {
     });
 
     this.authService.updateStatus(LocalSettingService.getLoginStatus());
+    this.getLogin();
   }
 
+
+  getLogin() {
+    this.apiService.getLogin().subscribe((res: any) => {
+      if (!res.loggedIn) {
+        this.authService.updateStatus(false);
+        LocalSettingService.clearLoginStatus();
+        this.router.navigateByUrl("/login");
+      }
+    })
+  }
 
   logout() {
     this.apiService.logout().subscribe(() => {

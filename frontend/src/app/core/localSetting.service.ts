@@ -10,4 +10,8 @@ export class LocalSettingService {
   static getLoginStatus() {
     return (localStorage.getItem("loggedIn")) == "true";
   }
+
+  static clearLoginStatus() {
+    localStorage.removeItem("loggedIn");
+  }
 }
