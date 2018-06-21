@@ -6,6 +6,7 @@ import {ProgressBarService} from "../core/progress-bar.service";
 import {ModalDirective} from "ngx-bootstrap";
 import {Subject} from "rxjs/Subject";
 import 'rxjs/add/observable/combineLatest';
+import * as showdownHighlight from "showdown-highlight/lib";
 
 declare let showdown: any;
 
@@ -21,7 +22,10 @@ declare let showdown: any;
 export class EditComponent implements OnInit, OnDestroy {
 
   renderedCnt = "";
-  converter = new showdown.Converter();
+  converter = new showdown.Converter({
+    // That's it
+    extensions: [showdownHighlight]
+  });
   updating: Subscription;
   @ViewChild("successModal") successModal: ModalDirective;
 
