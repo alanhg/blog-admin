@@ -7,6 +7,23 @@ const ROOT_DIR = require("../config").rootDir;
 const POST_SUFFIX = ".md";
 
 /**
+ * 鉴权中间件，如果用户session丢失，无权
+ * @param req
+ * @param res
+ * @param next
+ * @returns {*}
+ */
+const authMiddleWare = (req, res, next) => {
+    if (req.session && req.session.user) {
+        next();
+    }
+    else {
+        return res.status(401).json({error: "请登录!"})
+    }
+};
+
+
+/**
  * 获取所有博客列表
  */
 router.get('/posts', function (req, res, next) {
@@ -55,7 +72,8 @@ router.post('/posts', function (req, res) {
     const realFileName = outInfo.substring(outInfo.lastIndexOf('/') + 1, outInfo.length - 4); // 去除末尾的/n
     const content = fs.readFileSync(
         `${POST_DIR}${realFileName}${POST_SUFFIX}`, 'utf-8');
-    res.json({title: realFileName, content: content});
+    const createTime = fs.statSync(`${POST_DIR}${realFileName}${POST_SUFFIX}`).ctime;
+    res.json({title: realFileName, content: content, createTime: createTime});
 });
 
 /**
@@ -129,5 +147,4 @@ router.get('/logout', function (req, res) {
         }
     });
 });
-
 module.exports = router;
