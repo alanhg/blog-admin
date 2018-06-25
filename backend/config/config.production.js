@@ -5,9 +5,15 @@
 const config = {
     server: {
         port: 3100,
-        secret: 'kLand-campus'
+        secret: 'blog-admin'
     },
     rootDir: "/var/www/alanhg.github.io/",
-    postDir: "/var/www/alanhg.github.io/source/_posts/"
+    postDir: "/var/www/alanhg.github.io/source/_posts/",
+    redis: {
+        host: "localhost",
+        port: 6379,
+        db: 0,
+        expire: 60 * 60 //1h
+    }
 };
 module.exports = config;

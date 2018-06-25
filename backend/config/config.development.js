@@ -4,9 +4,9 @@
 const config = {
     server: {
         port: 3000,
-        secret: 'hhhhhh'
+        secret: "blog-admin"
     },
-    postDir: "/Users/alan/GitHub/alanhg.github.io/",
+    rootDir: "/Users/alan/GitHub/alanhg.github.io/",
     postDir: "/Users/alan/GitHub/alanhg.github.io/source/_posts/"
 };
 module.exports = config;

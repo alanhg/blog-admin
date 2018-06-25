@@ -9,11 +9,18 @@ const session = require("express-session");
 
 app.enable('trust proxy'); // trust first proxy
 app.use(bodyParser.json()); // for parsing application/json
-app.use(session({
+
+
+const sessionConfig = {
     secret: "Shh, its a secret!",
     resave: false,
     saveUninitialized: true
-}));
+};
+if (!isDeveloping) {
+    const RedisStore = require('connect-redis')(session);
+    sessionConfig.store = new RedisStore(conf.redis);
+}
+app.use(session(sessionConfig));
 // mount the router on the app
 app.use('/', routes);
 //配置静态资源
