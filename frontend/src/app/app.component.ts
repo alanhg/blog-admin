@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {ApiService} from "./core/api.service";
-import {AuthService} from "./core/auth.service";
-import {ProgressBarService} from "./core/progress-bar.service";
-import {LocalSettingService} from "./core/localSetting.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApiService} from './core/api.service';
+import {AuthService} from './core/auth.service';
+import {ProgressBarService} from './core/progress-bar.service';
+import {LocalSettingService} from './core/localSetting.service';
 
 declare let showdown: any;
 
@@ -40,16 +40,16 @@ export class AppComponent {
       if (!res.loggedIn) {
         this.authService.updateStatus(false);
         LocalSettingService.clearLoginStatus();
-        this.router.navigateByUrl("/login");
+        this.router.navigateByUrl('/login');
       }
-    })
+    });
   }
 
   logout() {
     this.apiService.logout().subscribe(() => {
       this.authService.updateStatus(false);
       LocalSettingService.setLoginStatus(false);
-      this.router.navigateByUrl("/login");
+      this.router.navigateByUrl('/login');
     });
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 /**
  *
@@ -12,20 +12,20 @@ export class ApiService {
 
 
   login(user: any) {
-    return this.http.post("/api/login", user);
+    return this.http.post('/api/login', user);
   }
 
 
   getLogin() {
-    return this.http.get("/api/login");
+    return this.http.get('/api/login');
   }
 
   logout() {
-    return this.http.get("/api/logout");
+    return this.http.get('/api/logout');
   }
 
   getPosts(q?: string) {
-    let url = "/api/posts";
+    let url = '/api/posts';
     if (q) {
       url += `?q=${q}`;
     }
@@ -49,11 +49,11 @@ export class ApiService {
   }
 
   addPost(title: string) {
-    return this.http.post("/api/posts", {title: title});
+    return this.http.post('/api/posts', {title: title});
   }
 
   deploy() {
-    return this.http.get("/api/deploy");
+    return this.http.get('/api/deploy');
 
   }
 }

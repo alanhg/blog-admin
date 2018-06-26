@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ApiService} from "../core/api.service";
-import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
-import {Router} from "@angular/router";
-import {Subject} from "rxjs/Subject";
+import {ApiService} from '../core/api.service';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/switchMap';
-import {ModalDirective} from "ngx-bootstrap";
+import {ModalDirective} from 'ngx-bootstrap';
 
 declare let showdown: any;
 declare let Mark: any;
@@ -27,9 +27,9 @@ export class PostsComponent implements OnInit {
   createStatus = false;
 
   queryField$ = new Subject<string>();
-  queryField = "";
+  queryField = '';
   selectedPost: string;
-  @ViewChild("confirmModal") confirmModal: ModalDirective;
+  @ViewChild('confirmModal') confirmModal: ModalDirective;
 
   deleteItem: any;
 
@@ -41,28 +41,28 @@ export class PostsComponent implements OnInit {
       .distinctUntilChanged()
       .switchMap(term => {
         this.queryField = term;
-        return this.searchPost(term)
+        return this.searchPost(term);
       })
       .subscribe((res: any) => {
-        this.posts = res["posts"];
+        this.posts = res['posts'];
         setTimeout(() => this.performMark(this.queryField), 0);
       });
   }
 
   ngOnInit() {
     this.apiService.getPosts().subscribe(res => {
-      this.posts = res["posts"];
+      this.posts = res['posts'];
       if (this.posts.length > 0) {
         this.getPost(this.posts[0].title);
       }
-    })
+    });
   }
 
   /**
    * 执行高亮
    */
   performMark(keyword: string) {
-    let markInstance = new Mark("#posts-list");
+    let markInstance = new Mark('#posts-list');
     markInstance.unmark();
     if (keyword) {
       markInstance.mark(keyword);
@@ -71,7 +71,7 @@ export class PostsComponent implements OnInit {
 
   searchPost(term: string) {
     if (term) {
-      term = term.toLowerCase()
+      term = term.toLowerCase();
     }
     return this.apiService.getPosts(term);
   }
@@ -79,10 +79,10 @@ export class PostsComponent implements OnInit {
 
   postClick(event, title: string, i: number) {
     const targetElement = event.target;
-    if (targetElement.tagName != "I") {
+    if (targetElement.tagName != 'I') {
       this.getPost(title);
     }
-    else if (targetElement.className.includes("fa-trash")) {
+    else if (targetElement.className.includes('fa-trash')) {
       this.deleteItem = {title: title, index: i};
       this.confirmModal.show();
     }
@@ -95,8 +95,8 @@ export class PostsComponent implements OnInit {
   getPost(title: string) {
     this.selectedPost = title;
     this.apiService.getPost(title).subscribe(res => {
-      this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res["content"]))
-    })
+      this.postHtml = this.sanitizer.bypassSecurityTrustHtml(this.converter.makeHtml(res['content']));
+    });
   }
 
 
@@ -108,22 +108,22 @@ export class PostsComponent implements OnInit {
   postDelete(title: string, index: number) {
     this.apiService.delPost(title).subscribe(res => {
       this.posts.splice(index, 1);
-    })
+    });
   }
 
   createPost(title: string) {
-    if (title.trim() === "") {
-      return
+    if (title.trim() === '') {
+      return;
     }
     this.apiService.addPost(title).subscribe((res: any) => {
-      this.posts.splice(0, 0, {title: res["title"], createTime: res["createTime"]});
+      this.posts.splice(0, 0, {title: res['title'], createTime: res['createTime']});
       this.createStatus = false;
-      this.getPost(res["title"]);
-    })
+      this.getPost(res['title']);
+    });
   }
 
   clearQueryField() {
-    this.queryField = "";
+    this.queryField = '';
     this.queryField$.next(null);
   }
 

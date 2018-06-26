@@ -1,29 +1,29 @@
-import {PostsComponent} from "./posts/posts.component";
-import {EditComponent} from "./edit/edit.component";
-import {AboutComponent} from "./about/about.component";
-import {AuthGuard} from "./auth.guard";
-import {LoginComponent} from "./login/login.component";
+import {PostsComponent} from './posts/posts.component';
+import {EditComponent} from './edit/edit.component';
+import {AboutComponent} from './about/about.component';
+import {AuthGuard} from './auth.guard';
+import {LoginComponent} from './login/login.component';
 
 export const appRoutes = [
   {
-    path: "",
+    path: '',
     redirectTo: 'posts',
     pathMatch: 'full'
   },
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent
   },
   {
-    path: "posts",
+    path: 'posts',
     children: [
-      {path: "", component: PostsComponent},
-      {path: ":id", component: EditComponent}
+      {path: '', component: PostsComponent},
+      {path: ':id', component: EditComponent}
     ],
     canActivate: [AuthGuard],
   },
   {
-    path: "about", component: AboutComponent,
+    path: 'about', component: AboutComponent,
     canActivate: [AuthGuard]
   },
 ];

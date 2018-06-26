@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from "rxjs/Subject";
+import {Subject} from 'rxjs/Subject';
 
 /**
  * 控制进度条隐显
@@ -7,7 +7,7 @@ import {Subject} from "rxjs/Subject";
 @Injectable()
 export class ProgressBarService {
 
-  isHiden: Subject<boolean>=new Subject<boolean>();
+  isHiden: Subject<boolean> = new Subject<boolean>();
 
   constructor() {
   }
