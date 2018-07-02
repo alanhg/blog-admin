@@ -60,7 +60,6 @@ mark, .mark {
 .rendered-post img {
   display: block;
   margin: 0 auto;
-  width: 20%;
 }
 
 .progress {
@@ -73,6 +72,8 @@ mark, .mark {
 
 .wordcount {
   position: absolute;
-  right: 20px;
-  color: gray;
+  right: 5px;
+  padding: 0 .3rem;
+  background: #007bff;
+  border-radius: .2rem;
 }
