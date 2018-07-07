@@ -25,6 +25,7 @@ export class AppComponent {
     this.progressBarService.isHiden.subscribe(res => this.hideProgress = res);
     showdown.setFlavor('github');
     showdown.setOption('openLinksInNewWindow', true);
+    showdown.setOption('strikethrough', true);
 
     this.authService.loggedIn$.subscribe(res => {
       this.loggedIn = res;
