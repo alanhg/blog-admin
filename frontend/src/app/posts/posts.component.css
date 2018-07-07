@@ -2,16 +2,42 @@
 .app-sidebar {
   border-right: 1px solid rgba(0, 0, 0, .1);
   background-color: #f7faff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  flex-direction: column;
+}
+
+.app-post-display {
+  display: flex;
+  flex: 1;
 }
 
 main {
-  min-height: 80vh;
+  height: calc(100vh - 64px);
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+div > .post-message {
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px;
+  background-color: #dfebff;
+  position: absolute;
+  text-align: center;
+  color: #000000;
+  opacity: .9;
 }
 
 #posts-list {
   background-color: #f7faff;
-  height: 100vh;
-  overflow-y: auto;
+  overflow: auto;
   font-size: 1.1rem;
   margin-right: -10px;
 }
@@ -77,4 +103,8 @@ main {
   font-size: .8rem;
   right: 0;
   bottom: 0.2rem;
+}
+
+.rendered-post {
+  overflow: auto;
 }
