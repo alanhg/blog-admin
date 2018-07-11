@@ -1,6 +1,6 @@
 <main class="container-fluid">
-  <div class="row">
-    <div class="col-md-3 app-sidebar">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 app-sidebar">
       <div class="post-search">
         <input type="search" class="form-control search" required
                (keyup)="queryField$.next($event.target.value)" [value]="queryField">
@@ -13,7 +13,7 @@
         <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">新建博客</button>
       </div>
       <ng-template #elseBlock>
-        <div class="input-group">
+        <div class="form-group">
           <input type="text" class="form-control" #fileName/>
           <div class="input-group-append">
             <i class="fa fa-2x  fa-check" (click)="createPost(fileName.value)"></i>
@@ -37,7 +37,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-md-9 app-post-display">
+    <div class="col-9 col-md-9 app-post-display">
       <div class="post-message">
         草稿
       </div>

@@ -1,12 +1,12 @@
 import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from '../core/api.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs/Subscription';
+import {Subject, Subscription} from 'rxjs';
 import {ProgressBarService} from '../core/progress-bar.service';
 import {ModalDirective} from 'ngx-bootstrap';
-import {Subject} from 'rxjs/Subject';
-import 'rxjs/add/observable/combineLatest';
+
 import * as showdownHighlight from 'showdown-highlight';
+import {debounceTime} from 'rxjs/operators';
 
 declare let showdown: any;
 
@@ -41,7 +41,7 @@ export class EditComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private progressBarService: ProgressBarService) {
-    this.sourceCnt$.debounceTime(400).subscribe(res => {
+    this.sourceCnt$.pipe(debounceTime(400)).subscribe(res => {
       this.savePost();
     });
   }

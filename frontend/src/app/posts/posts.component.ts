@@ -2,11 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from '../core/api.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Router} from '@angular/router';
-import {Subject} from 'rxjs/Subject';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
+import {Subject} from 'rxjs';
+
+
 import {ModalDirective} from 'ngx-bootstrap';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 declare let showdown: any;
 declare let Mark: any;
@@ -37,16 +37,13 @@ export class PostsComponent implements OnInit {
               private sanitizer: DomSanitizer,
               private router: Router
   ) {
-    this.queryField$.debounceTime(400)
-      .distinctUntilChanged()
-      .switchMap(term => {
-        this.queryField = term;
-        return this.searchPost(term);
-      })
-      .subscribe((res: any) => {
-        this.posts = res['posts'];
-        setTimeout(() => this.performMark(this.queryField), 0);
-      });
+    this.queryField$.pipe(debounceTime(400), distinctUntilChanged(), switchMap(term => {
+      this.queryField = term;
+      return this.searchPost(term);
+    })).subscribe((res: any) => {
+      this.posts = res['posts'];
+      setTimeout(() => this.performMark(this.queryField), 0);
+    });
   }
 
   ngOnInit() {
