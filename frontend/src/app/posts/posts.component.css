@@ -9,6 +9,7 @@
   -ms-flex: 1;
   flex: 1;
   flex-direction: column;
+  margin-top:1rem;
 }
 
 .app-post-display {
@@ -67,7 +68,7 @@ div > .post-message {
 }
 
 .post-search {
-  padding: 1rem 15px;
+  padding: 0 15px 1rem;
   margin-right: -15px;
   margin-left: -15px;
   border-bottom: 1px solid rgba(0, 0, 0, .05);
@@ -79,8 +80,7 @@ div > .post-message {
 
 .search-tip {
   position: absolute;
-  top: 26px;
-}
+top: 7px;}
 
 .search-tip.input-clear {
   display: none;
@@ -107,4 +107,8 @@ div > .post-message {
 
 .rendered-post {
   overflow: auto;
+}
+.post-input input{
+width:80%;
+float:left;
 }

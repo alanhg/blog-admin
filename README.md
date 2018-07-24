@@ -7,6 +7,18 @@
 + 双屏编辑与预览博客
 + 同步更新博客仓库及站点
 
-## Teachstack
+## Teach Stack
 + Angular
 + ExpressJS
+
+## Getstarted
+```bash
+# 启动后端
+$ cd backend
+$ npm run start
+
+# 启动前端
+$ cd frontend
+$ npm run start
+
+```

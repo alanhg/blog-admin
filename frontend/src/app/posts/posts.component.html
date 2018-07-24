@@ -1,19 +1,22 @@
 <main class="container-fluid">
   <div class="row flex-xl-nowrap">
     <div class="col-12 col-md-3 app-sidebar">
-      <div class="post-search">
-        <input type="search" class="form-control search" required
-               (keyup)="queryField$.next($event.target.value)" [value]="queryField">
-        <a class="fa fa-times input-clear search-tip" (click)="clearQueryField()"></a>
-        <span class="search-tip post-sum-info">
+      <ng-container *ngIf="createStatus==false">
+        <div class="post-search">
+          <input type="search" class="form-control search" required (keyup)="queryField$.next($event.target.value)"
+                 [value]="queryField">
+          <a class="fa fa-times input-clear search-tip" (click)="clearQueryField()"></a>
+          <span class="search-tip post-sum-info">
           共{{posts.length}}篇
         </span>
-      </div>
+        </div>
+      </ng-container>
+
       <div *ngIf="createStatus==false;else elseBlock">
         <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">新建博客</button>
       </div>
       <ng-template #elseBlock>
-        <div class="form-group">
+        <div class="form-group post-input">
           <input type="text" class="form-control" #fileName/>
           <div class="input-group-append">
             <i class="fa fa-2x  fa-check" (click)="createPost(fileName.value)"></i>
@@ -24,11 +27,11 @@
       <ul id="posts-list" class="list-unstyled">
         <li *ngFor="let item of posts;let i=index" (click)="postClick($event,item.title,i)"
             [ngClass]="{'post-selected':selectedPost===item.title}">
-        <span title="{{item.title}}">
-          {{item.title}}
-        </span>
+          <span title="{{item.title}}">
+            {{item.title}}
+          </span>
           <span class="post-date">
-          {{item.createTime|date:"M/d/yy" }}
+            {{item.createTime|date:"M/d/yy" }}
           </span>
           <i class="fa fa-trash float-right" title="删除">
           </i>
@@ -46,7 +49,6 @@
     </div>
   </div>
 </main>
-
 <div class="modal fade" bsModal #confirmModal="bs-modal" [config]="{backdrop:'static'}">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
