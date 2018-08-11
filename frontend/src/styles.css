@@ -13,6 +13,7 @@ body {
 html, body {
   height: 100%;
   max-height: 100%;
+  overflow-x: hidden;
 }
 
 header {
@@ -45,6 +46,10 @@ header ul li a {
 mark, .mark {
   background-color: #f0ad4e;
   padding: .2em;
+}
+
+.operator-icon {
+  cursor: pointer;
 }
 
 .rendered-post {
