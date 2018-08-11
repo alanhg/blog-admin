@@ -1,6 +1,6 @@
 <main class="container-fluid">
-  <div class="row flex-xl-nowrap">
-    <div class="col-12 col-md-3 app-sidebar">
+  <div class="row">
+    <div class="col-md-3 app-sidebar">
       <ng-container *ngIf="createStatus==false">
         <div class="post-search">
           <input type="search" class="form-control search" required (keyup)="queryField$.next($event.target.value)"
@@ -40,7 +40,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-9 col-md-9 app-post-display">
+    <div class="col-md-9 app-post-display">
       <div class="post-message">
         草稿
       </div>

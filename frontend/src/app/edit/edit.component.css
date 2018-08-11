@@ -35,10 +35,9 @@
 }
 
 .post-container {
-  flex-basis: 50%;
+  flex: 1;
   padding: 5px;
   display: flex;
-  flex-direction: column;
   height: 100%;
   overflow: auto;
   box-sizing: border-box;

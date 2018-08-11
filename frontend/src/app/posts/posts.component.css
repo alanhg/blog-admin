@@ -2,14 +2,9 @@
 .app-sidebar {
   border-right: 1px solid rgba(0, 0, 0, .1);
   background-color: #f7faff;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
   flex: 1;
   flex-direction: column;
-  margin-top:1rem;
+  margin-top: 1rem;
 }
 
 .app-post-display {
@@ -80,7 +75,8 @@ div > .post-message {
 
 .search-tip {
   position: absolute;
-top: 7px;}
+  top: 7px;
+}
 
 .search-tip.input-clear {
   display: none;
@@ -106,9 +102,11 @@ top: 7px;}
 }
 
 .rendered-post {
-  overflow: auto;
+  overflow-y: auto;
+  flex: 1;
 }
-.post-input input{
-width:80%;
-float:left;
+
+.post-input input {
+  width: 80%;
+  float: left;
 }
