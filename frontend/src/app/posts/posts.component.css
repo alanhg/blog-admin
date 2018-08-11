@@ -2,6 +2,7 @@
 .app-sidebar {
   border-right: 1px solid rgba(0, 0, 0, .1);
   background-color: #f7faff;
+  display: flex;
   flex: 1;
   flex-direction: column;
   margin-top: 1rem;
@@ -33,6 +34,7 @@ div > .post-message {
 
 #posts-list {
   background-color: #f7faff;
+  flex: 1;
   overflow: auto;
   font-size: 1.1rem;
   margin-right: -10px;
