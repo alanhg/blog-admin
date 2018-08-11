@@ -3,7 +3,6 @@
   border-right: 1px solid rgba(0, 0, 0, .1);
   background-color: #f7faff;
   display: flex;
-  flex: 1;
   flex-direction: column;
   margin-top: 1rem;
 }
