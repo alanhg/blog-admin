@@ -26,8 +26,10 @@
 <div class="modal fade" bsModal #confirmModal="bs-modal" [config]="{backdrop:'static'}">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-      <div class="modal-body text-center">
+      <div class="modal-body">
         <p>确定要发布?</p>
+      </div>
+      <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="publish()">确定</button>
         <button type="button" class="btn btn-secondary" (click)="confirmModal.hide()">取消</button>
       </div>

@@ -10,10 +10,6 @@ import {debounceTime} from 'rxjs/operators';
 
 declare let showdown: any;
 
-/**
- * 双屏显示博客原文及渲染后页面
- *
- */
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -23,7 +19,6 @@ export class EditComponent implements OnInit, OnDestroy {
 
   renderedCnt = '';
   converter = new showdown.Converter({
-    // That's it
     extensions: [showdownHighlight]
   });
   updating: Subscription;
@@ -54,9 +49,7 @@ export class EditComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * 发布
-   */
+
   publish() {
     this.progressBarService.show(true);
     this.apiService.deploy().subscribe(res => {
@@ -66,24 +59,16 @@ export class EditComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * 更新成功提示确认
-   */
   confirm() {
     this.successModal.hide();
   }
 
-  /**
-   * 更新渲染
-   */
+
   updateView() {
     this.sourceCnt$.next(this.sourceCnt);
     this.renderedCnt = this.converter.makeHtml(this.sourceCnt);
   }
 
-  /**
-   * 保存文章
-   */
   savePost() {
     this.updating = this.apiService.updatePost(this.title, this.sourceCnt).subscribe(res => {
       this.router.navigate(['/posts/', this.title]);
