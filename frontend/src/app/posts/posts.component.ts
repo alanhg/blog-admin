@@ -55,9 +55,6 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  /**
-   * 执行高亮
-   */
   performMark(keyword: string) {
     let markInstance = new Mark('#posts-list');
     markInstance.unmark();
@@ -105,6 +102,7 @@ export class PostsComponent implements OnInit {
   postDelete(title: string, index: number) {
     this.apiService.delPost(title).subscribe(res => {
       this.posts.splice(index, 1);
+      this.apiService.deploy().subscribe();
     });
   }
 
@@ -128,6 +126,4 @@ export class PostsComponent implements OnInit {
     this.confirmModal.hide();
     this.postDelete(this.deleteItem.title, this.deleteItem.index);
   }
-
-
 }
