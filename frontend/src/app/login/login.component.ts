@@ -5,9 +5,6 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LocalSettingService} from '../core/localSetting.service';
 
-/**
- *
- */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +12,7 @@ import {LocalSettingService} from '../core/localSetting.service';
 })
 export class LoginComponent implements OnInit {
   userForm: FormGroup;
-
+  currentYear = (new Date()).getFullYear();
 
   constructor(private apiService: ApiService,
               private authService: AuthService,
