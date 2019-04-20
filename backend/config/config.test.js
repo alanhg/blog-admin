@@ -8,6 +8,6 @@ const config = {
         secret: "blog-admin"
     },
     rootDir: "/var/www/alanhg.github.io",
-    postDir: "/var/www/alanhg.github.io/source/_posts"
+    postDir: "/source/_posts"
 };
 module.exports = config;

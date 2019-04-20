@@ -6,7 +6,7 @@ const config = {
         port: 3000,
         secret: "blog-admin"
     },
-    rootDir: "/Users/alan/GitHub/alanhg.github.io/",
-    postDir: "/Users/alan/GitHub/alanhg.github.io/source/_posts/"
+    rootDir: "/Users/qhe/Documents/GitHub/alanhg.github.io",
+    postDir: "/source/_posts/"
 };
 module.exports = config;
