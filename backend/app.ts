@@ -1,13 +1,13 @@
+import express, {Request, Response} from 'express';
 import session, {SessionOptions} from "express-session";
 import connectRedis from 'connect-redis';
-import express, {Request, Response} from 'express';
+import * as bodyParser from 'body-parser';
 // @ts-ignore
 import conf from './config';
+import routes from './routes';
+import path from 'path';
 
 const app = express();
-const routes = require('./routes');
-const path = require('path');
-const bodyParser = require('body-parser');
 const isDeveloping = (process.env.NODE_ENV || 'development') == 'development';
 
 let RedisStore = connectRedis(session);
@@ -37,8 +37,6 @@ if (!isDeveloping) {
         res.sendFile(__dirname + '/dist/index.html');
     });
 }
-// @ts-ignore
-console.log(conf);
 
 // @ts-ignore
 app.listen(conf.server.port, "127.0.0.1", function () {

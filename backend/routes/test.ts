@@ -11,4 +11,4 @@ router.get('/process', (req: Request, res: Response) => {
     console.log(__dirname);
     res.json({data: result});
 });
-module.exports = router;
+export default router;

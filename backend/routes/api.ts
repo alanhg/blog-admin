@@ -1,11 +1,11 @@
 const express = require('express');
 import {NextFunction, Request, Response} from 'express';
+import fs from 'fs';
+import process from 'child_process';
 
 const router = express.Router();
-const fs = require('fs');
-const process = require('child_process');
-const ROOT_DIR = require('../config').rootDir;
-const POST_DIR = ROOT_DIR + require('../config').postDir;
+const ROOT_DIR: string = require('../config').default.rootDir;
+const POST_DIR: string = ROOT_DIR + require('../config').default.postDir;
 const POST_SUFFIX = '.md';
 
 /**
@@ -105,7 +105,7 @@ router.get('/deploy', function (req: Request, res: Response) {
     } catch (ex) {
         result = ex.stdout;
     }
-    res.json({status: 'ok'});
+    res.status(200);
 });
 /**
  * Some hardcoded users to make the demo work
@@ -148,4 +148,4 @@ router.get('/logout', function (req: Request, res: Response) {
         }
     });
 });
-module.exports = router;
+export default router;
