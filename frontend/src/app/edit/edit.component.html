@@ -10,7 +10,7 @@
   <div class="post-container">
     <textarea #postContent class="form-control sourceCnt"
               [(ngModel)]="sourceCnt"
-              (ngModelChange)="updateView()"
+              (ngModelChange)="sourceCntChange()"
               (scroll)="editorScrolled($event)" appAllowTab>
     </textarea>
   </div>

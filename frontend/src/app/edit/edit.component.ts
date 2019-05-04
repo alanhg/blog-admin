@@ -36,7 +36,8 @@ export class EditComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private progressBarService: ProgressBarService) {
-    this.sourceCnt$.pipe(debounceTime(400)).subscribe(res => {
+    this.sourceCnt$.pipe(debounceTime(500)).subscribe(res => {
+      this.renderedCnt = this.converter.makeHtml(this.sourceCnt);
       this.savePost();
     });
   }
@@ -45,7 +46,7 @@ export class EditComponent implements OnInit, OnDestroy {
     this.title = this.route.snapshot.paramMap.get('id');
     this.apiService.getPost(this.title).subscribe(res => {
       this.sourceCnt = res['content'];
-      this.updateView();
+      this.sourceCntChange();
     });
   }
 
@@ -64,9 +65,8 @@ export class EditComponent implements OnInit, OnDestroy {
   }
 
 
-  updateView() {
+  sourceCntChange() {
     this.sourceCnt$.next(this.sourceCnt);
-    this.renderedCnt = this.converter.makeHtml(this.sourceCnt);
   }
 
   savePost() {
