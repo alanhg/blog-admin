@@ -1,4 +1,6 @@
 const express = require('express');
+import {NextFunction, Request, Response} from 'express';
+
 const router = express.Router();
 const fs = require('fs');
 const process = require('child_process');
@@ -13,7 +15,7 @@ const POST_SUFFIX = '.md';
  * @param next
  * @returns {*}
  */
-const authMiddleWare = (req, res, next) => {
+const authMiddleWare = (req: Request, res: Response, next: NextFunction) => {
     if (req.session && req.session.user) {
         next();
     } else {
@@ -25,25 +27,25 @@ const authMiddleWare = (req, res, next) => {
 /**
  * 获取所有博客列表
  */
-router.get('/posts', function (req, res, next) {
-    let files = fs.readdirSync(POST_DIR).map(function (v) {
+router.get('/posts', function (req: Request, res: Response, next: NextFunction) {
+    let files = fs.readdirSync(POST_DIR).map(function (v: any) {
             return {
                 title: v,
                 time: fs.statSync(POST_DIR + v).ctime.getTime(),
                 createTime: fs.statSync(POST_DIR + v).ctime
             };
         }
-    ).filter((it) => !it.title.startsWith('.'))
-        .sort(function (a, b) {
+    ).filter((it: any) => !it.title.startsWith('.'))
+        .sort(function (a: any, b: any) {
             return b.time - a.time;
-        }).map(function (v) {
+        }).map(function (v: any) {
             return {
                 title: v.title.substring(0, v.title.lastIndexOf('.')),
                 createTime: v.createTime
             };
         });
     if (req.query.q) {
-        files = files.filter((it) => it.title.toLowerCase().includes(req.query.q));
+        files = files.filter((it: any) => it.title.toLowerCase().includes(req.query.q));
     }
     res.send({posts: files, count: files.length});
 });
@@ -51,7 +53,7 @@ router.get('/posts', function (req, res, next) {
 /**
  * 获取单篇博客信息
  */
-router.get('/posts/:title', function (req, res) {
+router.get('/posts/:title', function (req: Request, res: Response) {
     const file = fs.readFileSync(
         `${POST_DIR}${req.params.title}${POST_SUFFIX}`, 'utf-8');
     res.json({content: file, title: req.params.title});
@@ -60,7 +62,7 @@ router.get('/posts/:title', function (req, res) {
 /**
  * 新建博客
  */
-router.post('/posts', function (req, res) {
+router.post('/posts', function (req: Request, res: Response) {
     if (typeof req.body.title === 'undefined') {
         return res.status(400).json({error: '标题不能为空'});
     }
@@ -78,7 +80,7 @@ router.post('/posts', function (req, res) {
 /**
  * 更新单篇博客
  */
-router.put('/posts', function (req, res) {
+router.put('/posts', function (req: Request, res: Response) {
     fs.writeFileSync(`${POST_DIR}${req.body.title}${POST_SUFFIX}`, req.body.content);
     res.json({status: 'ok'});
 });
@@ -86,14 +88,14 @@ router.put('/posts', function (req, res) {
 /**
  * 删除单篇博客
  */
-router.delete('/posts/:title', function (req, res, next) {
+router.delete('/posts/:title', function (req: Request, res: Response) {
     fs.unlinkSync(`${POST_DIR}${req.params.title}${POST_SUFFIX}`);
     res.json({status: 'OK'});
 });
 /**
  * 发布
  */
-router.get('/deploy', function (req, res) {
+router.get('/deploy', function (req: Request, res: Response) {
     let result;
     try {
         result = process.execSync(`git add . && git commit -m 'Update post' && git push && hexo g`, {
@@ -116,12 +118,12 @@ const appUsers = {
     }
 };
 
-router.post('/login', (req, res) => {
-        const user = appUsers[req.body.email];
+router.post('/login', (req: Request, res: Response) => {
+        const user = (<any>appUsers)[req.body.email];
         if (user && user.password === req.body.password) {
             const userWithoutPassword = {...user};
             delete userWithoutPassword.password;
-            req.session.user = userWithoutPassword;
+            req!.session!.user = userWithoutPassword;
             res.status(200).send({
                 user: userWithoutPassword
             });
@@ -133,12 +135,12 @@ router.post('/login', (req, res) => {
     }
 );
 
-router.get('/login', (req, res) => {
-    req.session.user ? res.status(200).send({loggedIn: true}) : res.status(200).send({loggedIn: false});
+router.get('/login', (req: Request, res: Response) => {
+    req!.session!.user ? res.status(200).send({loggedIn: true}) : res.status(200).send({loggedIn: false});
 });
 
-router.get('/logout', function (req, res) {
-    req.session.destroy((err) => {
+router.get('/logout', function (req: Request, res: Response) {
+    req!.session!.destroy((err) => {
         if (err) {
             res.status(500).send('Could not log out.');
         } else {

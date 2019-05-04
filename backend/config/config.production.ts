@@ -16,4 +16,4 @@ const config = {
         expire: 60 * 60 //1h
     }
 };
-module.exports = config;
+export default config;

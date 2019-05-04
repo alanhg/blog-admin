@@ -10,4 +10,4 @@ const config = {
     rootDir: "/var/www/alanhg.github.io",
     postDir: "/source/_posts"
 };
-module.exports = config;
+export default config;

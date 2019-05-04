@@ -9,4 +9,4 @@ const config = {
     rootDir: "/Users/qhe/Documents/GitHub/alanhg.github.io",
     postDir: "/source/_posts/"
 };
-module.exports = config;
+export default config;

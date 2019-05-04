@@ -1,23 +1,28 @@
-const express = require('express');
+import session, {SessionOptions} from "express-session";
+import connectRedis from 'connect-redis';
+import express, {Request, Response} from 'express';
+// @ts-ignore
+import conf from './config';
+
 const app = express();
-const conf = require('./config');
-const routes = require('./routes/index');
+const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
 const isDeveloping = (process.env.NODE_ENV || 'development') == 'development';
-const session = require("express-session");
+
+let RedisStore = connectRedis(session);
 
 app.enable('trust proxy'); // trust first proxy
 app.use(bodyParser.json()); // for parsing application/json
 
 
-const sessionConfig = {
-    secret: "Shh, its a secret!",
+const sessionConfig: SessionOptions = {
+    secret: 'Shh, its a secret!',
     resave: false,
     saveUninitialized: true
 };
 if (!isDeveloping) {
-    const RedisStore = require('connect-redis')(session);
+    // @ts-ignore
     sessionConfig.store = new RedisStore(conf.redis);
 }
 app.use(session(sessionConfig));
@@ -28,12 +33,16 @@ app.use('/', express.static(path.join(__dirname, '/static')));
 
 if (!isDeveloping) {
     app.use('/', express.static(path.join(__dirname, 'dist')));
-    app.get('*', function (req, res) {
+    app.get('*', function (req: Request, res: Response) {
         res.sendFile(__dirname + '/dist/index.html');
     });
 }
+// @ts-ignore
+console.log(conf);
 
+// @ts-ignore
 app.listen(conf.server.port, "127.0.0.1", function () {
-        console.log(`campus-server app listening on port ${conf.server.port}!`);
+        // @ts-ignore
+        console.log(`blog-admin app listening on port ${conf.server.port}!`);
     }
 );
