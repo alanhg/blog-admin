@@ -11,9 +11,6 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 declare let showdown: any;
 declare let Mark: any;
 
-/**
- * 博客列表页
- */
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -75,12 +72,10 @@ export class PostsComponent implements OnInit {
     const targetElement = event.target;
     if (targetElement.tagName != 'I') {
       this.getPost(title);
-    }
-    else if (targetElement.className.includes('fa-trash')) {
+    } else if (targetElement.className.includes('fa-trash')) {
       this.deleteItem = {title: title, index: i};
       this.confirmModal.show();
-    }
-    else {
+    } else {
       this.postEdit(title);
     }
   }
@@ -100,9 +95,10 @@ export class PostsComponent implements OnInit {
 
 
   postDelete(title: string, index: number) {
-    this.apiService.delPost(title).subscribe(res => {
-      this.posts.splice(index, 1);
-      this.apiService.deploy().subscribe();
+    this.apiService.delPost(title).subscribe(() => {
+      this.apiService.deploy().subscribe(() => {
+        this.posts.splice(index, 1);
+      });
     });
   }
 
