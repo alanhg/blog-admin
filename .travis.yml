@@ -15,13 +15,15 @@ install:
 script:
   - cd frontend
   - npm run build
+  - cd ..
   - cd backend
   - npm run build
   - cd ..
 after_script:
   - cd ./frontend/dist/blog-admin
   - rsync -az -vv --delete -e 'ssh -p $DEPLOY_PORT' ./** root@$DEPLOY_IP:/var/www/blog-admin-test/dist
-  - cd ../../backend/dist
+  - cd ..
+  - cd ./backend/dist
   - rsync -az -vv --delete -e 'ssh -p $DEPLOY_PORT' ./** root@$DEPLOY_IP:/var/www/blog-admin-test
 branches:
   only:
