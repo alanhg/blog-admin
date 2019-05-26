@@ -27,3 +27,6 @@ after_script:
 branches:
   only:
     - master
+notifications:
+  email:
+    - i@alanhe.me
