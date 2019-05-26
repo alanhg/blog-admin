@@ -8,7 +8,7 @@ fs.readFile(indexFilePath, 'utf8', function (err, data) {
     return console.log(err);
   }
   const $ = cheerio.load(data, {decodeEntities: false});
-  const releaseDate = moment().format('YYYY-MM-DD HH:mm');
+  const releaseDate = moment().local().format('YYYY-MM-DD HH:mm');
   $('meta').last().append(`<meta name="releaseDate" content="${releaseDate}"/>`);
   // now write that file back
   fs.writeFile(indexFilePath, $.html(), function (err) {
