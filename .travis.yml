@@ -28,7 +28,7 @@ after_script:
   - rsync -az -vv --delete -e 'ssh -p 22' ./** root@132.232.104.101:/var/www/blog-admin
   - cd ../..
   - rsync -az -vv --delete -e 'ssh -p 22' backend/package*.json root@132.232.104.101:/var/www/blog-admin
-  - ssh -p 22 root@132.232.104.101 "npm install --production;pm2 restart blog-admin"
+  - ssh -p 22 root@132.232.104.101 "cd /var/www/blog-admin;npm install --production;pm2 restart blog-admin"
 branches:
   only:
     - master
