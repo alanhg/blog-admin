@@ -98,7 +98,7 @@ router.delete('/posts/:title', function (req: Request, res: Response) {
 router.get('/deploy', function (req: Request, res: Response) {
     let result;
     try {
-        result = process.execSync(`git add . && git commit -m 'Update post' && git push && hexo g`, {
+        result = process.execSync(`git pull --rebase && git add . && git commit -m 'Update post' && git push && hexo g`, {
             cwd: `${ROOT_DIR}`,
             encoding: 'utf8'
         });
