@@ -4,7 +4,8 @@ addons:
   ssh_known_hosts:
   - 132.232.104.101
 before_install:
-- openssl aes-256-cbc -K $encrypted_6fc3eccd8200_key -iv $encrypted_6fc3eccd8200_iv -in travis.enc -out travis -d
+- openssl aes-256-cbc -K $encrypted_6fc3eccd8200_key -iv $encrypted_6fc3eccd8200_iv -in travis.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
 install:
 - cd backend
 - npm install
