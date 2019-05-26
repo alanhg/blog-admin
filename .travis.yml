@@ -22,10 +22,10 @@ script:
   - cd ..
 after_script:
   - cd ./frontend/dist/blog-admin
-  - rsync -az -vv --delete -e 'ssh -p 22' ./** root@132.232.104.101:/var/www/blog-admin-test/dist
+  - rsync -az -vv --delete -e 'ssh -p 22' ./** root@132.232.104.101:/var/www/blog-admin/dist
   - cd ../../..
   - cd ./backend/dist
-  - rsync -az -vv --delete -e 'ssh -p 22' ./** root@132.232.104.101:/var/www/blog-admin-test
+  - rsync -az -vv --delete -e 'ssh -p 22' ./** root@132.232.104.101:/var/www/blog-admin
   - cd ../..
   - pm2 restart blog-admin
 branches:
