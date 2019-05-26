@@ -4,8 +4,7 @@ addons:
   ssh_known_hosts:
     - 132.232.104.101
 before_install:
-  - openssl aes-256-cbc -K $encrypted_6fc3eccd8200_key -iv $encrypted_6fc3eccd8200_iv
-  -in id_rsa.enc -out id_rsa -d
+  - openssl aes-256-cbc -K $encrypted_6fc3eccd8200_key -iv $encrypted_6fc3eccd8200_iv -in id_rsa.enc -out id_rsa -d
 install:
   - cd backend
   - npm install
