@@ -23,9 +23,11 @@ script:
 after_script:
   - cd ./frontend/dist/blog-admin
   - rsync -az -vv --delete -e 'ssh -p 22' ./** root@132.232.104.101:/var/www/blog-admin-test/dist
-  - cd ..
+  - cd ../../..
   - cd ./backend/dist
   - rsync -az -vv --delete -e 'ssh -p 22' ./** root@132.232.104.101:/var/www/blog-admin-test
+  - cd ../..
+  - pm2 restart blog-admin
 branches:
   only:
     - master
