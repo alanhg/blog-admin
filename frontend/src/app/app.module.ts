@@ -17,6 +17,7 @@ import {BsDropdownModule, ModalModule, ProgressbarModule} from 'ngx-bootstrap';
 import {ProgressBarService} from './core/progress-bar.service';
 import {WordcountPipe} from './shared/wordcount.pipe';
 import { AllowTabDirective } from './shared/allow-tab.directive';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AllowTabDirective } from './shared/allow-tab.directive';
     AboutComponent,
     SafePipe,
     WordcountPipe,
-    AllowTabDirective
+    AllowTabDirective,
+    ControlPanelComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import {EditComponent} from './edit/edit.component';
 import {AboutComponent} from './about/about.component';
 import {AuthGuard} from './auth.guard';
 import {LoginComponent} from './login/login.component';
+import {ControlPanelComponent} from "./control-panel/control-panel.component";
 
 export const appRoutes = [
   {
@@ -25,5 +26,10 @@ export const appRoutes = [
   {
     path: 'about', component: AboutComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'control-panel',
+    component: ControlPanelComponent,
+    canActivate: [AuthGuard],
   },
 ];

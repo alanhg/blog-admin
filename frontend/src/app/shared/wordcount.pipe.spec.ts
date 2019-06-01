@@ -1,4 +1,6 @@
-import { WordcountPipe } from './wordcount.pipe';
+import {WordcountPipe} from './wordcount.pipe';
+// @ts-ignore
+import {describe, expect, it} from 'jasmine';
 
 describe('WordcountPipe', () => {
   it('create an instance', () => {

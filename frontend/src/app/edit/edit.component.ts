@@ -7,6 +7,7 @@ import {ModalDirective} from 'ngx-bootstrap';
 
 import * as showdownHighlight from 'showdown-highlight';
 import {debounceTime} from 'rxjs/operators';
+import {COMMAND_DEPLOY} from "../shared/util";
 
 declare let showdown: any;
 
@@ -53,7 +54,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   publish() {
     this.progressBarService.show(true);
-    this.apiService.deploy().subscribe(res => {
+    this.apiService.execute(COMMAND_DEPLOY).subscribe(res => {
       this.progressBarService.show(false);
       this.confirmModal.hide();
       this.successModal.show();

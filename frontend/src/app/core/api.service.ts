@@ -52,8 +52,7 @@ export class ApiService {
     return this.http.post('/api/posts', {title: title});
   }
 
-  deploy() {
-    return this.http.get('/api/deploy');
-
+  execute(command: string) {
+    return this.http.get('/api/execute', {params: {command}});
   }
 }
