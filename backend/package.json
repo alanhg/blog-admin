@@ -16,6 +16,7 @@
     "express": "~4.16.4",
     "express-session": "^1.16.1",
     "http-errors": "~1.7.2",
+    "moment": "^2.24.0",
     "morgan": "~1.9.1",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
