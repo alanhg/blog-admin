@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from "../core/api.service";
-import {COMMAND_GENERATE_STATIC_HTML} from "../shared/util";
+import {ExecuteCommands} from "../shared/util";
 import {ProgressBarService} from "../core/progress-bar.service";
 
 @Component({
@@ -10,15 +10,18 @@ import {ProgressBarService} from "../core/progress-bar.service";
 })
 export class ControlPanelComponent implements OnInit {
 
+  generateStaticHtml = ExecuteCommands.generateStaticHtml;
+  updateBlogSource = ExecuteCommands.updateBlogSource;
+
   constructor(private apiService: ApiService, private progressBarService: ProgressBarService) {
   }
 
   ngOnInit() {
   }
 
-  execute() {
+  execute(command: ExecuteCommands) {
     this.progressBarService.show(true);
-    this.apiService.execute(COMMAND_GENERATE_STATIC_HTML).subscribe(res => {
+    this.apiService.execute(command).subscribe(res => {
       this.progressBarService.show(false);
     })
   }

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {ExecuteCommands} from "../shared/util";
 
 /**
  *
@@ -52,7 +53,7 @@ export class ApiService {
     return this.http.post('/api/posts', {title: title});
   }
 
-  execute(command: string) {
-    return this.http.get('/api/execute', {params: {command}});
+  execute(command: ExecuteCommands) {
+    return this.http.get('/api/execute', {params: {command: command.toString()}});
   }
 }

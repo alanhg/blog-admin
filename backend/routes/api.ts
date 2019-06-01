@@ -9,8 +9,9 @@ const POST_DIR: string = ROOT_DIR + require('../config').default.postDir;
 const POST_SUFFIX = '.md';
 
 const EXECUTE_COMMANDS: any = {
-    'deploy': 'git pull --rebase && git add . && git commit -m \'Update post\' && git push && hexo g',
-    'generate-static-html': 'hexo g'
+    deploy: 'git pull --rebase && git add . && git commit -m \'Update post\' && git push && hexo generate',
+    updateBlogSource: 'git pull --rebase',
+    generateStaticHtml: 'hexo generate'
 };
 
 const APP_USERS = {
@@ -77,13 +78,16 @@ router.delete('/posts/:title', function (req: Request, res: Response) {
 
 router.get('/execute', function (req: Request, res: Response) {
     try {
-        process.execSync(EXECUTE_COMMANDS[req.params.command], {
-            cwd: `${ROOT_DIR}`,
-            encoding: 'utf8'
-        });
-    } catch (ex) {
+        process.execSync(EXECUTE_COMMANDS[req.query.command], {
+                cwd: `${ROOT_DIR}`,
+                encoding: 'utf8'
+            }
+        );
+        res.status(200);
+    } catch (e) {
+        console.log(e);
+        res.status(500);
     }
-    res.status(200);
 });
 
 router.post('/login', (req: Request, res: Response) => {

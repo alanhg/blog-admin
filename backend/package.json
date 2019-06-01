@@ -7,7 +7,7 @@
     "hotstart": "nodemon app.ts",
     "tsc": "tsc",
     "lint": "tslint --project tsconfig.json -e 'node_modules/**'",
-    "build": "tsc"
+    "build": "npm run lint && tsc"
   },
   "dependencies": {
     "connect-redis": "^3.4.1",
