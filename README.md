@@ -22,3 +22,5 @@ $ cd frontend
 $ npm run start
 
 ```
+
+since 2018.6
