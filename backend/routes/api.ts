@@ -77,17 +77,12 @@ router.delete('/posts/:title', function (req: Request, res: Response) {
 });
 
 router.get('/execute', function (req: Request, res: Response) {
-    try {
-        process.execSync(EXECUTE_COMMANDS[req.query.command], {
-                cwd: `${ROOT_DIR}`,
-                encoding: 'utf8'
-            }
-        );
-        res.status(200);
-    } catch (e) {
-        console.log(e);
-        res.status(500);
-    }
+    process.exec(EXECUTE_COMMANDS[req.query.command], {
+            cwd: `${ROOT_DIR}`,
+            encoding: 'utf8'
+        }
+    );
+    res.status(200);
 });
 
 router.post('/login', (req: Request, res: Response) => {
