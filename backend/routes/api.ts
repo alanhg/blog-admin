@@ -9,7 +9,7 @@ const POST_DIR: string = ROOT_DIR + require('../config').default.postDir;
 const POST_SUFFIX = '.md';
 
 const EXECUTE_COMMANDS: any = {
-    deploy: 'git pull --rebase && git add . && git commit -m \'Update post\' && git push && hexo generate',
+    deploy: 'git pull --rebase --autostash && git add . && git commit -m \'Update post\' && git push && hexo generate',
     updateBlogSource: 'git pull --rebase',
     generateStaticHtml: 'hexo generate'
 };
@@ -55,7 +55,7 @@ router.post('/posts', function (req: Request, res: Response) {
     if (typeof req.body.title === 'undefined') {
         return res.status(400).json({error: '标题不能为空'});
     }
-    let outInfo = process.execSync(`cd ${POST_DIR} && hexo new '${req.body.title}'`, {
+    const outInfo = process.execSync(`cd ${POST_DIR} && hexo new '${req.body.title}'`, {
         cwd: ROOT_DIR,
         encoding: 'utf8'
     }).toString();

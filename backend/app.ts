@@ -1,5 +1,5 @@
 import express, {Request, Response} from 'express';
-import session, {SessionOptions} from "express-session";
+import session, {SessionOptions} from 'express-session';
 import connectRedis from 'connect-redis';
 import * as bodyParser from 'body-parser';
 // @ts-ignore
@@ -8,9 +8,9 @@ import routes from './routes';
 import path from 'path';
 
 const app = express();
-const isDeveloping = (process.env.NODE_ENV || 'development') == 'development';
+const isDeveloping = (process.env.NODE_ENV || 'development') === 'development';
 
-let RedisStore = connectRedis(session);
+const RedisStore = connectRedis(session);
 
 app.enable('trust proxy'); // trust first proxy
 app.use(bodyParser.json()); // for parsing application/json
@@ -28,7 +28,7 @@ if (!isDeveloping) {
 app.use(session(sessionConfig));
 // mount the router on the app
 app.use('/', routes);
-//配置静态资源
+// 配置静态资源
 app.use('/', express.static(path.join(__dirname, '/static')));
 
 if (!isDeveloping) {
@@ -39,7 +39,7 @@ if (!isDeveloping) {
 }
 
 // @ts-ignore
-app.listen(conf.server.port, "127.0.0.1", function () {
+app.listen(conf.server.port, '127.0.0.1', function () {
         // @ts-ignore
         console.log(`blog-admin app listening on port ${conf.server.port}!`);
     }

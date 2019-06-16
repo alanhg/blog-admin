@@ -18,12 +18,12 @@
     "http-errors": "~1.7.2",
     "moment": "^2.24.0",
     "morgan": "~1.9.1",
-    "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
   "devDependencies": {
     "@types/connect-redis": "0.0.10",
     "@types/express": "^4.16.1",
+    "tslint": "^5.16.0",
     "ts-node": "^8.1.0"
   }
 }
