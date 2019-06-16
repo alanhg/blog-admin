@@ -11,4 +11,9 @@ router.get('/process', (req: Request, res: Response) => {
     console.log(__dirname);
     res.json({data: result});
 });
+
+router.get('/pending', (req: Request, res: Response) => {
+    res.json('ok');
+});
+
 export default router;
