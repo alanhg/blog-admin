@@ -1,7 +1,7 @@
 const express = require('express');
 import {NextFunction, Request, Response} from 'express';
 import fs from 'fs';
-import process from 'child_process';
+import {execSync} from 'child_process';
 
 const router = express.Router();
 const ROOT_DIR: string = require('../config').default.rootDir;
@@ -10,7 +10,7 @@ const POST_SUFFIX = '.md';
 
 const EXECUTE_COMMANDS: any = {
     deploy: 'git pull --rebase --autostash && git add . && git commit -m \'Update post\' && git push && hexo generate',
-    updateBlogSource: 'git pull --rebase',
+    updateBlogSource: 'git pull --rebase --autostash',
     generateStaticHtml: 'hexo generate'
 };
 
@@ -55,7 +55,7 @@ router.post('/posts', function (req: Request, res: Response) {
     if (typeof req.body.title === 'undefined') {
         return res.status(400).json({error: '标题不能为空'});
     }
-    const outInfo = process.execSync(`cd ${POST_DIR} && hexo new '${req.body.title}'`, {
+    const outInfo = execSync(`cd ${POST_DIR} && hexo new '${req.body.title}'`, {
         cwd: ROOT_DIR,
         encoding: 'utf8'
     }).toString();
@@ -77,12 +77,16 @@ router.delete('/posts/:title', function (req: Request, res: Response) {
 });
 
 router.get('/execute', function (req: Request, res: Response) {
-    process.exec(EXECUTE_COMMANDS[req.query.command], {
-            cwd: `${ROOT_DIR}`,
-            encoding: 'utf8'
-        }
-    );
-    res.status(200);
+    try {
+        const outInfo = execSync(EXECUTE_COMMANDS[req.query.command], {
+                cwd: `${ROOT_DIR}`,
+                encoding: 'utf8'
+            }
+        );
+        res.json({data: outInfo});
+    } catch (e) {
+        return res.status(500).send(e);
+    }
 });
 
 router.post('/login', (req: Request, res: Response) => {
