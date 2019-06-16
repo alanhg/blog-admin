@@ -17,7 +17,7 @@
       </div>
       <ng-template #elseBlock>
         <div class="form-group post-input">
-          <input type="text" class="form-control" #fileName/>
+          <input type="text" class="form-control" #fileName (keypress)="fileNameInputKeyPress($event)"/>
           <div class="input-group-append">
             <i class="fa fa-2x  fa-check operator-icon" (click)="createPost(fileName.value)"></i>
             <i class="fa fa-2x fa-close operator-icon" (click)="createStatus=false"></i>

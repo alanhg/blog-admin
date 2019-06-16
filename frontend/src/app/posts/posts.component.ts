@@ -123,4 +123,10 @@ export class PostsComponent implements OnInit {
     this.confirmModal.hide();
     this.postDelete(this.deleteItem.title, this.deleteItem.index);
   }
+
+  fileNameInputKeyPress(e: any) {
+    if (13 === e.keyCode) {
+      this.createPost(e.target.value);
+    }
+  }
 }
