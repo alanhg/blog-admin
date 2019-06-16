@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit {
   queryField$ = new Subject<string>();
   queryField = '';
   selectedPost: string;
-  @ViewChild('confirmModal') confirmModal: ModalDirective;
+  @ViewChild('confirmModal', {static: false}) confirmModal: ModalDirective;
 
   deleteItem: any;
 

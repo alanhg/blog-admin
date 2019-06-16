@@ -23,15 +23,15 @@ export class EditComponent implements OnInit, OnDestroy {
     extensions: [showdownHighlight]
   });
   updating: Subscription;
-  @ViewChild('successModal') successModal: ModalDirective;
-  @ViewChild('confirmModal') confirmModal: ModalDirective;
+  @ViewChild('successModal', {static: false}) successModal: ModalDirective;
+  @ViewChild('confirmModal', {static: false}) confirmModal: ModalDirective;
   title: string;
   sourceCnt: string;
 
   title$ = new Subject<string>();
   sourceCnt$ = new Subject<string>();
 
-  @ViewChild('rendered') rendered: ElementRef;
+  @ViewChild('rendered', {static: false}) rendered: ElementRef;
 
   constructor(private apiService: ApiService,
               private route: ActivatedRoute,
