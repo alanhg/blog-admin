@@ -7,7 +7,7 @@ import {Subject} from 'rxjs';
 
 import {ModalDirective} from 'ngx-bootstrap';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
-import {ExecuteCommands} from "../shared/util";
+import {ExecuteCommands} from '../shared/util';
 
 declare let showdown: any;
 declare let Mark: any;
@@ -97,9 +97,8 @@ export class PostsComponent implements OnInit {
 
   postDelete(title: string, index: number) {
     this.apiService.delPost(title).subscribe(() => {
-      this.apiService.execute(ExecuteCommands.deploy).subscribe(() => {
-        this.posts.splice(index, 1);
-      });
+      this.posts.splice(index, 1);
+      this.apiService.execute(ExecuteCommands.deploy).subscribe();
     });
   }
 
