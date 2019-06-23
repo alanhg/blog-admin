@@ -9,7 +9,7 @@ const POST_DIR: string = ROOT_DIR + require('../config').default.postDir;
 const POST_SUFFIX = '.md';
 
 const EXECUTE_COMMANDS: any = {
-    deploy: 'git pull --rebase --autostash && git add . && git commit -m \'Update post\' && git push && hexo generate',
+    deploy: 'git add -A && git commit -m \'Update post\' && git push && hexo generate',
     updateBlogSource: 'git pull --rebase --autostash',
     generateStaticHtml: 'hexo generate'
 };
