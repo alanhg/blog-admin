@@ -7,7 +7,7 @@ import {ModalDirective} from 'ngx-bootstrap';
 
 import * as showdownHighlight from 'showdown-highlight';
 import {debounceTime} from 'rxjs/operators';
-import {ExecuteCommands} from "../shared/util";
+import {ExecuteCommands} from '../shared/util';
 
 declare let showdown: any;
 
@@ -84,4 +84,8 @@ export class EditComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
+  confirmModalCanceled() {
+    this.confirmModal.hide();
+    this.progressBarService.show(false);
+  }
 }
