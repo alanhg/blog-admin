@@ -14,6 +14,11 @@ const config = {
         port: 6379,
         db: 0,
         expire: 60 * 60 // 1h
+    },
+    login: {
+        email: process.env.BLOG_ADMIN_EMAIL,
+        password: process.env.BLOG_ADMIN_PASSWORD,
+        name: process.env.BLOG_ADMIN_NAME
     }
 };
 export default config;

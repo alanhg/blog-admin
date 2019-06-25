@@ -7,19 +7,12 @@ const router = express.Router();
 const ROOT_DIR: string = require('../config').default.rootDir;
 const POST_DIR: string = ROOT_DIR + require('../config').default.postDir;
 const POST_SUFFIX = '.md';
+const login: any = require('../config').default.login;
 
 const EXECUTE_COMMANDS: any = {
     deploy: 'git add -A && git commit -m \'Update post\' && git push && hexo generate',
     updateBlogSource: 'git pull --rebase --autostash',
     generateStaticHtml: 'hexo generate'
-};
-
-const APP_USERS = {
-    'max@gmail.com': {
-        email: 'max@gmail.com',
-        name: 'Max Miller',
-        password: '1234'
-    }
 };
 
 router.get('/posts', function (req: Request, res: Response, next: NextFunction) {
@@ -90,9 +83,8 @@ router.get('/execute', function (req: Request, res: Response) {
 });
 
 router.post('/login', (req: Request, res: Response) => {
-        const user = (<any>APP_USERS)[req.body.email];
-        if (user && user.password === req.body.password) {
-            const userWithoutPassword = {...user};
+        if (login.email === req.body.email && login.password === req.body.password) {
+            const userWithoutPassword = {...login};
             delete userWithoutPassword.password;
             req!.session!.user = userWithoutPassword;
             res.status(200).send({
