@@ -9,8 +9,8 @@ const config = {
     rootDir: '/Users/qhe/Documents/GitHub/alanhg.github.io',
     postDir: '/source/_posts/',
     login: {
-        email: 'max@gmail.com',
-        password: '1234',
+        email: 'admin',
+        password: 'admin',
         name: 'Max Miller'
     }
 };
