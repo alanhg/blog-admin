@@ -9,7 +9,7 @@ import {AboutComponent} from './about/about.component';
 import {appRoutes} from './app.routes';
 import {ApiService} from './core/api.service';
 import {AuthService} from './core/auth.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SafePipe} from './shared/safe.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './auth.guard';
@@ -18,6 +18,7 @@ import {ProgressBarService} from './core/progress-bar.service';
 import {WordcountPipe} from './shared/wordcount.pipe';
 import { AllowTabDirective } from './shared/allow-tab.directive';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import {AuthInterceptor} from './core/auth.interceptor';
 
 
 @NgModule({
@@ -46,7 +47,12 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
     AuthService,
     ApiService,
     AuthGuard,
-    ProgressBarService
+    ProgressBarService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
