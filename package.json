@@ -9,7 +9,8 @@
     "startb": "cd backend && npm run start",
     "build:front": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
-    "build:all": "npm run build:front && npm run build:backend"
+    "build:all": "npm run build:front && npm run build:backend&& mv ./frontend/dist .",
+    "bundle": "mv ./frontend/dist/blog-admin ./prod/dist && mv backend/dist/* ./prod && mv backend/package*.json ./prod"
   },
   "repository": {
     "type": "git",
