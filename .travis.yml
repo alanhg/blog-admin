@@ -14,12 +14,7 @@ install:
   - npm install
   - cd ..
 script:
-  - cd frontend
-  - npm run build
-  - cd ..
-  - cd backend
-  - npm run build
-  - cd ..
+  - npm run build:all
 after_script:
   - cd ./frontend/dist/blog-admin
   - rsync -az -vv --delete -e 'ssh -p 29554' ./** root@1991421.cn:/var/www/blog-admin/dist
