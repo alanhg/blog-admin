@@ -1,10 +1,12 @@
 <div class="row editor-top">
-  <div class="col-md-12">
-    <span>{{title}}.md</span>
-    <button type="button" class="btn btn-secondary">博客链接</button>
-    <button class="btn btn-primary float-right publish-btn" (click)="confirmModal.show()">
-      发布
-    </button>
+  <div class="col-9">{{title}}.md</div>
+  <div class="col-3 publish-btn">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-secondary">博客链接</button>
+      <button type="button" class="btn btn-primary" (click)="confirmModal.show()">
+        发布
+      </button>
+    </div>
   </div>
 </div>
 <div class="post-containers">

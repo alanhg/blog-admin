@@ -24,9 +24,7 @@
 }
 
 .publish-btn {
-  position: absolute;
-  top: 0;
-  right: 15px;
+  text-align: right;
 }
 
 .post-containers {
