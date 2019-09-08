@@ -27,8 +27,6 @@ export class EditComponent implements OnInit, OnDestroy {
   @ViewChild('confirmModal', {static: false}) confirmModal: ModalDirective;
   title: string;
   sourceCnt: string;
-
-  title$ = new Subject<string>();
   sourceCnt$ = new Subject<string>();
 
   @ViewChild('rendered', {static: false}) rendered: ElementRef;
