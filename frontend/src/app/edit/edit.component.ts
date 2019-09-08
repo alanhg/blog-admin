@@ -7,7 +7,9 @@ import {ModalDirective} from 'ngx-bootstrap';
 
 import * as showdownHighlight from 'showdown-highlight';
 import {debounceTime} from 'rxjs/operators';
-import {ExecuteCommands} from '../shared/util';
+import {ExecuteCommands, getPostLink, parseMDContent} from '../shared/util';
+import {IPost} from '../shared/post';
+import * as ClipboardJS from 'clipboard';
 
 declare let showdown: any;
 
@@ -28,6 +30,7 @@ export class EditComponent implements OnInit, OnDestroy {
   title: string;
   sourceCnt: string;
   sourceCnt$ = new Subject<string>();
+  postLink: string;
 
   @ViewChild('rendered', {static: false}) rendered: ElementRef;
 
@@ -45,7 +48,10 @@ export class EditComponent implements OnInit, OnDestroy {
     this.title = this.route.snapshot.paramMap.get('id');
     this.apiService.getPost(this.title).subscribe(res => {
       this.sourceCnt = res['content'];
+      const post: IPost = parseMDContent(this.sourceCnt);
+      this.postLink = getPostLink(post);
       this.sourceCntChange();
+      new ClipboardJS('.btn');
     });
   }
 

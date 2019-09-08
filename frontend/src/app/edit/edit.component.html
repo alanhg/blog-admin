@@ -1,8 +1,14 @@
 <div class="row editor-top">
-  <div class="col-9">{{title}}.md</div>
+  <div class="col-9">{{title}}.md
+    <Span *ngIf="postLink" id="postUrl">
+    {{
+      postLink
+      }}
+  </Span>
+  </div>
   <div class="col-3 publish-btn">
     <div class="btn-group" role="group">
-      <button type="button" class="btn btn-secondary">博客链接</button>
+      <button type="button" class="btn btn-secondary" data-clipboard-target="#postUrl">博客链接</button>
       <button type="button" class="btn btn-primary" (click)="confirmModal.show()">
         发布
       </button>

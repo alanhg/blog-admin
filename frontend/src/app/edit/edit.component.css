@@ -40,3 +40,7 @@
   overflow: auto;
   box-sizing: border-box;
 }
+
+#postUrl {
+  opacity: 0;
+}
