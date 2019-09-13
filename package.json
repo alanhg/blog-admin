@@ -10,7 +10,7 @@
     "build:front": "cd frontend && npm run build",
     "build:backend": "cd backend && npm run build",
     "build:all": "npm run build:front && npm run build:backend && mv ./frontend/dist .",
-    "bundle": "mkdir -p ./bundle/dist && mv ./frontend/dist/blog-admin/* ./bundle/dist && mv backend/dist/* ./bundle && mv backend/package*.json ./bundle"
+    "bundle": "mkdir -p ./bundle/dist && cp -r ./frontend/dist/blog-admin/* ./bundle/dist && cp -r backend/dist/* ./bundle && cp backend/package*.json ./bundle"
   },
   "repository": {
     "type": "git",
