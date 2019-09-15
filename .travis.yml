@@ -17,7 +17,7 @@ script:
   - npm run build:all
   - npm run bundle
 after_script:
-  - rsync -az -vv --delete -e 'ssh -p 29554' ./prod/** root@1991421.cn:/var/www/blog-admin
+  - rsync -az -vv --delete -e 'ssh -p 29554' ./bundle/** root@1991421.cn:/var/www/blog-admin
   - ssh -p 29554 root@1991421.cn "cd /var/www/blog-admin;npm install --production;pm2 restart blog-admin"
 branches:
   only:
