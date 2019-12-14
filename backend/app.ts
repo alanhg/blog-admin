@@ -39,7 +39,7 @@ if (!isDeveloping) {
 }
 
 // @ts-ignore
-app.listen(conf.server.port, '127.0.0.1', function () {
+app.listen(conf.server.port, '0.0.0.0', function () {
         // @ts-ignore
         console.log(`blog-admin app listening on port ${conf.server.port}!`);
     }
