@@ -98,7 +98,7 @@ export class PostsComponent implements OnInit {
   postDelete(title: string, index: number) {
     this.apiService.delPost(title).subscribe(() => {
       this.posts.splice(index, 1);
-      this.apiService.execute(ExecuteCommands.deploy).subscribe();
+      this.apiService.execute(ExecuteCommands.publishPost).subscribe();
     });
   }
 

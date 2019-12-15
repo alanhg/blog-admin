@@ -58,7 +58,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   publish() {
     this.progressBarService.show(true);
-    this.apiService.execute(ExecuteCommands.deploy).subscribe(res => {
+    this.apiService.execute(ExecuteCommands.publishPost).subscribe(res => {
       this.progressBarService.show(false);
       this.confirmModal.hide();
       this.successModal.show();

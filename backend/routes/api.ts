@@ -9,10 +9,11 @@ const POST_DIR: string = ROOT_DIR + require('../config').default.postDir;
 const POST_SUFFIX = '.md';
 const login: any = require('../config').default.login;
 
-const EXECUTE_COMMANDS: any = {
-    deploy: 'git add -A && git commit -m \'Update post\' && git push && hexo generate',
+const EXECUTE_COMMANDS: {
+    [key: string]: string
+} = {
+    publishPost: 'git add -A && git commit -m \'Update post\' && git push',
     updateBlogSource: 'git pull --rebase --autostash',
-    generateStaticHtml: 'hexo generate'
 };
 
 router.get('/posts', function (req: Request, res: Response, next: NextFunction) {
@@ -99,7 +100,11 @@ router.post('/login', (req: Request, res: Response) => {
 );
 
 router.get('/login', (req: Request, res: Response) => {
-    req!.session!.user ? res.status(200).send({loggedIn: true}) : res.status(200).send({loggedIn: false});
+    try {
+        req!.session!.user && res.status(200).send({loggedIn: true});
+    } catch (e) {
+        res.redirect(301, '/login');
+    }
 });
 
 router.get('/logout', function (req: Request, res: Response) {

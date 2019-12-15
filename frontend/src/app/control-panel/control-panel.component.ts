@@ -10,8 +10,8 @@ import {ProgressBarService} from "../core/progress-bar.service";
 })
 export class ControlPanelComponent implements OnInit {
 
-  generateStaticHtml = ExecuteCommands.generateStaticHtml;
   updateBlogSource = ExecuteCommands.updateBlogSource;
+  publishPost = ExecuteCommands.publishPost;
 
   constructor(private apiService: ApiService, private progressBarService: ProgressBarService) {
   }

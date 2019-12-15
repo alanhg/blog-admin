@@ -7,13 +7,13 @@
                  [value]="queryField">
           <a class="fa fa-times input-clear search-tip" (click)="clearQueryField()"></a>
           <span class="search-tip post-sum-info">
-          共{{posts.length}}篇
+          {{posts.length}}articles
         </span>
         </div>
       </ng-container>
 
       <div *ngIf="createStatus==false;else elseBlock">
-        <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">新建博客</button>
+        <button type="button" class="btn btn-outline-primary" (click)="createStatus=true">new post</button>
       </div>
       <ng-template #elseBlock>
         <div class="form-group post-input">
@@ -42,7 +42,7 @@
     </div>
     <div class="col-md-9 app-post-display">
       <div class="post-message">
-        草稿
+        draft
       </div>
       <div id="post-content" [innerHtml]="postHtml" class="rendered-post">
       </div>

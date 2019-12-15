@@ -7,10 +7,10 @@ const config = {
         port: 3100,
         secret: 'blog-admin'
     },
-    rootDir: '/var/www/alanhg.github.io/',
+    rootDir: '/var/www/blog/alanhg.github.io/',
     postDir: 'source/_posts/',
     redis: {
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 6379,
         db: 0,
         expire: 60 * 60 // 1h

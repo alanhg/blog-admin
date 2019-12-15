@@ -3,9 +3,8 @@ import * as moment from 'moment';
 import {BLOG_URL} from './constants';
 
 export enum ExecuteCommands {
-  deploy = 'deploy',
-  updateBlogSource = 'updateBlogSource',
-  generateStaticHtml = 'generateStaticHtml'
+  publishPost = 'publishPost',
+  updateBlogSource = 'updateBlogSource'
 }
 
 export const parseMDContent = (content: string): IPost => {

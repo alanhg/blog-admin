@@ -21,10 +21,10 @@ const sessionConfig: SessionOptions = {
     resave: false,
     saveUninitialized: true
 };
-if (!isDeveloping) {
-    // @ts-ignore
-    sessionConfig.store = new RedisStore(conf.redis);
-}
+// if (!isDeveloping) {
+//     // @ts-ignore
+//     sessionConfig.store = new RedisStore(conf.redis);
+// }
 app.use(session(sessionConfig));
 // mount the router on the app
 app.use('/', routes);
